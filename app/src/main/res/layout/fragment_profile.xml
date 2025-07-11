@@ -11,6 +11,28 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <!-- top bar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_topbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내 거래"
+                style="@style/TextAppearance.TUgether.Topbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

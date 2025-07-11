@@ -7,7 +7,13 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
-    
+
+    <style name="TextAppearance.TUgether.Topbar">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+    </style>
+
     <style name="TextAppearance.TUgether.Head1">
         <item name="android:textSize">20sp</item>
     </style>
