@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.TUgether" parent="">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black_main</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+    
+    <style name="TextAppearance.TUgether.Head1">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.TUgether.Head2">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.TUgether.Body1">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.TUgether.Warning">
+        <item name="textFillColor">@color/warning</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.TUgether.Bnv">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/blue_400</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+    </style>
+</resources>
