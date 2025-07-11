@@ -11,6 +11,38 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <!-- top bar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_topbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TUgether"
+                style="@style/TextAppearance.TUgether.Topbar"
+                android:textSize="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_topbar_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_alarm"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_topbar"
+                app:layout_constraintBottom_toBottomOf="@id/tv_topbar"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 본문 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

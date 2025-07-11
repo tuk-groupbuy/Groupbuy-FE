@@ -39,10 +39,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_topbar"
                 app:layout_constraintBottom_toBottomOf="@id/tv_topbar"/>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        <!-- 본문 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
