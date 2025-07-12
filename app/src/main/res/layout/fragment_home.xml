@@ -110,7 +110,6 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_home_recentPost"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constrainedHeight="true"
                     android:orientation="vertical"
                     android:layout_marginTop="30dp"
