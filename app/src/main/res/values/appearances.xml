@@ -15,15 +15,39 @@
     </style>
 
     <style name="TextAppearance.TUgether.Head1">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/black_main</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
     </style>
 
     <style name="TextAppearance.TUgether.Head2">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black_main</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
+    </style>
+
+    <style name="TextAppearance.TUgether.Head3">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_main</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
     </style>
 
     <style name="TextAppearance.TUgether.Body1">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_main</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="TextAppearance.TUgether.Body2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blue_400</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="TextAppearance.TUgether.Body3">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/blue_400</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
     </style>
 
     <style name="TextAppearance.TUgether.Warning">
