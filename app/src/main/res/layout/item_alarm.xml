@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/view_1"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/iv_alarm_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@color/gray_100"
+            app:layout_constraintStart_toEndOf="@id/view_1"
+            app:layout_constraintTop_toBottomOf="@id/view_1"/>
+            
+        <TextView
+            android:id="@+id/tv_alarm_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="물건 이름"
+            style="@style/TextAppearance.TUgether.Head2"
+            android:maxLines="1"
+            android:singleLine="true"
+            app:layout_constraintStart_toEndOf="@id/iv_alarm_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_alarm_image"
+            app:layout_constraintBottom_toTopOf="@id/tv_alarm_present"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_alarm_present"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재"
+            style="@style/TextAppearance.TUgether.Body2"
+            app:layout_constraintStart_toStartOf="@id/tv_alarm_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_alarm_title"
+            app:layout_constraintBottom_toBottomOf="@id/iv_alarm_image"
+            android:layout_marginBottom="4dp"/>
+
+        <ImageView
+            android:id="@+id/iv_alarm_personnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person"
+            app:layout_constraintStart_toEndOf="@id/tv_alarm_present"
+            app:layout_constraintTop_toTopOf="@id/tv_alarm_present"
+            app:layout_constraintBottom_toBottomOf="@id/tv_alarm_present"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="2dp"/>
+
+        <TextView
+            android:id="@+id/tv_alarm_personnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/0"
+            style="@style/TextAppearance.TUgether.Body2"
+            app:layout_constraintStart_toEndOf="@id/iv_alarm_personnel"
+            app:layout_constraintTop_toTopOf="@id/tv_alarm_present"/>
+
+        <View
+            android:id="@+id/view_2"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_alarm_image"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_2"
+            app:layout_constrainedHeight="true"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:listitem="@layout/item_alarm_request"/>
+
+        <View
+            android:id="@+id/view_3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_200"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_alarm"
+            android:layout_marginTop="16dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

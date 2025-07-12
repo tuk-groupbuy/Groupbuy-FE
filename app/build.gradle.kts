@@ -98,4 +98,7 @@ dependencies {
 
     //indicator : https://github.com/tommybuonomo/dotsindicator?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=7127
     implementation(libs.dotsindicator)
+
+    // circle image
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 }
