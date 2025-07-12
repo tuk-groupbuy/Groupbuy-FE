@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_settle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/view_1"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/iv_post_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@color/gray_100"
+            app:layout_constraintStart_toEndOf="@id/view_1"
+            app:layout_constraintTop_toBottomOf="@id/view_1"/>
+            
+        <TextView
+            android:id="@+id/tv_settle_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="물건 이름"
+            style="@style/TextAppearance.TUgether.Head2"
+            android:maxLines="1"
+            android:singleLine="true"
+            app:layout_constraintStart_toEndOf="@id/iv_post_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_post_image"
+            android:layout_marginHorizontal="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_settle_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="마감 n일 전"
+            style="@style/TextAppearance.TUgether.Body3"
+            app:layout_constraintStart_toStartOf="@id/tv_settle_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_settle_title"
+            app:layout_constraintBottom_toTopOf="@id/tv_settle_price"
+            android:layout_marginTop="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_settle_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₩00,000"
+            style="@style/TextAppearance.TUgether.Body2"
+            app:layout_constraintStart_toStartOf="@id/tv_settle_title"
+            app:layout_constraintBottom_toBottomOf="@id/iv_post_image"/>
+
+        <ImageView
+            android:id="@+id/iv_post_personnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person"
+            app:layout_constraintStart_toEndOf="@id/tv_settle_price"
+            app:layout_constraintTop_toTopOf="@id/tv_settle_price"
+            app:layout_constraintBottom_toBottomOf="@id/tv_settle_price"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:id="@+id/tv_settle_personnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/0"
+            style="@style/TextAppearance.TUgether.Body2"
+            app:layout_constraintStart_toEndOf="@id/iv_post_personnel"
+            app:layout_constraintBottom_toBottomOf="@id/iv_post_image"/>
+
+        <View
+            android:id="@+id/view_2"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_post_image"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
