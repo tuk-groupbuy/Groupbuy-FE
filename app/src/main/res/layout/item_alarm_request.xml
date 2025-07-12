@@ -52,6 +52,7 @@
             android:text="거절"
             style="@style/TextAppearance.TUgether.Head2"
             android:textSize="14sp"
+            android:textColor="@color/gray_300"
             android:background="@drawable/shape_rect_999_gray200_fill"
             app:layout_constraintEnd_toStartOf="@id/tv_alarmRequest_approval"
             app:layout_constraintTop_toTopOf="@id/iv_alarmRequest_image"
