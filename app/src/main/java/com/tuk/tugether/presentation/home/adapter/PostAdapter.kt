@@ -15,10 +15,10 @@ class PostAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(post: Post) {
-            binding.tvSettleTitle.text = post.title
-            binding.tvSettleDeadline.text = post.deadline
-            binding.tvSettlePrice.text = post.price
-            binding.tvSettlePersonnel.text = post.personnel
+            binding.tvPostTitle.text = post.title
+            binding.tvPostDeadline.text = post.deadline
+            binding.tvPostPrice.text = post.price
+            binding.tvPostPersonnel.text = post.personnel
 
             // 이미지 로딩
             Glide.with(binding.root.context)

@@ -6,6 +6,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tuk.tugether.R
 import com.tuk.tugether.databinding.FragmentHomeBinding
 import com.tuk.tugether.presentation.base.BaseFragment
@@ -20,6 +21,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var postAdapter: PostAdapter
 
     override fun initView() {
+        bottomNavigationShow()
         initRecyclerView()
         initSearchInputListener()
         setClickListener()
@@ -27,6 +29,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun initObserver() {
         observePostList()
+    }
+
+    // BottomNavigationView 보이기
+    private fun bottomNavigationShow() {
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.main_bnv)
+        bottomNavigationView?.visibility = View.VISIBLE
     }
 
     private fun initRecyclerView() {
@@ -48,14 +57,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun setClickListener() {
+        // 검색창 입력 삭제
         binding.ivHomeDelete.setOnClickListener {
             binding.etHomeSearch.text.clear()
         }
 
-        binding.ivTopbarAlarm.setOnSingleClickListener {
+        // 알림 이동
+        binding.ivHomeTopbarAlarm.setOnSingleClickListener {
             findNavController().navigate(R.id.goToAlarm)
         }
+
+        // 검색창 클릭 → 검색 모드 진입
+        binding.etHomeSearch.setOnClickListener {
+            binding.layoutSearchTopbar.visibility = View.VISIBLE
+            binding.clSearch.visibility = View.VISIBLE
+            binding.clHome.visibility = View.INVISIBLE
+            binding.layoutHomeTopbar.visibility = View.INVISIBLE
+        }
+
+        // 뒤로가기 클릭 → 홈 모드 복귀
+        binding.ivSearchTopbarBack.setOnClickListener {
+            binding.layoutSearchTopbar.visibility = View.INVISIBLE
+            binding.clSearch.visibility = View.INVISIBLE
+            binding.clHome.visibility = View.VISIBLE
+            binding.layoutHomeTopbar.visibility = View.VISIBLE
+            binding.etHomeSearch.text.clear()
+        }
     }
+
 
     private fun observePostList() {
         viewModel.postList.observe(viewLifecycleOwner) { posts ->

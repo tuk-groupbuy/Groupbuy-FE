@@ -8,7 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_settle"
+        android:id="@+id/cl_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toBottomOf="@id/view_1"/>
             
         <TextView
-            android:id="@+id/tv_settle_title"
+            android:id="@+id/tv_post_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="물건 이름"
@@ -44,23 +44,23 @@
             android:layout_marginHorizontal="16dp"/>
 
         <TextView
-            android:id="@+id/tv_settle_deadline"
+            android:id="@+id/tv_post_deadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="마감 n일 전"
             style="@style/TextAppearance.TUgether.Body3"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/tv_settle_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_settle_title"
-            app:layout_constraintBottom_toTopOf="@id/tv_settle_price"/>
+            app:layout_constraintStart_toStartOf="@id/tv_post_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_post_title"
+            app:layout_constraintBottom_toTopOf="@id/tv_post_price"/>
 
         <TextView
-            android:id="@+id/tv_settle_price"
+            android:id="@+id/tv_post_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="₩00,000"
             style="@style/TextAppearance.TUgether.Body2"
-            app:layout_constraintStart_toStartOf="@id/tv_settle_title"
+            app:layout_constraintStart_toStartOf="@id/tv_post_title"
             app:layout_constraintBottom_toBottomOf="@id/iv_post_image"/>
 
         <ImageView
@@ -69,13 +69,13 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_person"
             app:layout_constraintStart_toEndOf="@id/iv_post_image"
-            app:layout_constraintTop_toTopOf="@id/tv_settle_price"
-            app:layout_constraintBottom_toBottomOf="@id/tv_settle_price"
+            app:layout_constraintTop_toTopOf="@id/tv_post_price"
+            app:layout_constraintBottom_toBottomOf="@id/tv_post_price"
             android:layout_marginStart="120dp"
             android:layout_marginBottom="2dp"/>
 
         <TextView
-            android:id="@+id/tv_settle_personnel"
+            android:id="@+id/tv_post_personnel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0/0"

@@ -55,16 +55,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:visibility="invisible"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_alarm"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_alarm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_topbar"
-            app:layout_constrainedHeight="true"
-            android:orientation="vertical"
-            android:visibility="visible"
-            tools:listitem="@layout/item_alarm"/>
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_topbar"
+                app:layout_constrainedHeight="true"
+                android:orientation="vertical"
+                android:visibility="visible"
+                tools:listitem="@layout/item_alarm"/>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
