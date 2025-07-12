@@ -82,6 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             binding.clHome.visibility = View.VISIBLE
             binding.layoutHomeTopbar.visibility = View.VISIBLE
             binding.etHomeSearch.text.clear()
+            hideKeyboard()
         }
     }
 
@@ -94,4 +95,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             binding.rvHomePicture.adapter = postAdapter
         }
     }
+
+    private fun hideKeyboard() {
+        val imm = requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        imm.hideSoftInputFromWindow(binding.etHomeSearch.windowToken, 0)
+        binding.etHomeSearch.clearFocus()
+    }
+
 }

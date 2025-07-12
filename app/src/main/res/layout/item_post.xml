@@ -71,7 +71,7 @@
             app:layout_constraintStart_toEndOf="@id/iv_post_image"
             app:layout_constraintTop_toTopOf="@id/tv_post_price"
             app:layout_constraintBottom_toBottomOf="@id/tv_post_price"
-            android:layout_marginStart="120dp"
+            android:layout_marginStart="100dp"
             android:layout_marginBottom="2dp"/>
 
         <TextView
