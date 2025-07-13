@@ -31,6 +31,13 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="TextAppearance.TUgether.Bold.Body1">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
+    </style>
+
+
     <style name="TextAppearance.TUgether.Bnv">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/blue_400</item>
