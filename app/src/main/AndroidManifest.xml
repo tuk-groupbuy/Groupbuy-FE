@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="35">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="fullSensor">
             <intent-filter>
@@ -24,6 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".presentation.singup.SignupActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
 
         <!-- Trigger Google Play services to install the backported photo picker module. -->
         <service android:name="com.google.android.gms.metadata.ModuleDependencies"
