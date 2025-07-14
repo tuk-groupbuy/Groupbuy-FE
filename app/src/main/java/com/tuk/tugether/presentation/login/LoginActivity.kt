@@ -2,7 +2,6 @@ package com.tuk.tugether.presentation.login
 
 import android.content.Intent
 import android.graphics.Typeface
-import android.os.Bundle
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
@@ -10,50 +9,43 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
+import com.tuk.tugether.R
 import com.tuk.tugether.databinding.ActivityLoginBinding
 import com.tuk.tugether.presentation.MainActivity
+import com.tuk.tugether.presentation.base.BaseActivity
 import com.tuk.tugether.presentation.singup.SignupActivity
-import androidx.core.widget.doAfterTextChanged
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun initView() {
         setSignUpText()
 
         // EditText -> ViewModel
-        // 이메일
         binding.etLoginEmail.doAfterTextChanged { text ->
             loginViewModel.email.value = text?.toString()
         }
 
-// 비밀번호
         binding.etLoginPassword.doAfterTextChanged { text ->
             loginViewModel.password.value = text?.toString()
         }
 
-        // 로그인 버튼
         binding.btnLoginLogin.setOnClickListener {
             loginViewModel.login()
         }
+    }
 
-        // 결과 감지
+    override fun initObserver() {
         loginViewModel.loginResult.observe(this) { result ->
             Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
 
             if (result == "로그인 성공") {
-                // ✅ MainActivity로 이동
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish() // LoginActivity 종료 (뒤로가기 시 다시 안 보이게)
+                finish()
             }
         }
     }
@@ -75,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
                 ds.isUnderlineText = false
-                ds.color = ContextCompat.getColor(this@LoginActivity, com.tuk.tugether.R.color.blue_400)
+                ds.color = ContextCompat.getColor(this@LoginActivity, R.color.blue_400)
             }
         }, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
