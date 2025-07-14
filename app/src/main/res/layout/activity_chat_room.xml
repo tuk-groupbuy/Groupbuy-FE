@@ -12,6 +12,13 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/chat_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/layout_read_coordinator"
             android:layout_width="match_parent"
@@ -38,7 +45,7 @@
                         android:layout_marginTop="20dp"
                         android:text="채팅방 이름"
                         style="@style/TextAppearance.TUgether.Bold.Body1"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +72,7 @@
                         android:paddingVertical="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/tv_chat_title"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_chat_title"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_chat_title"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -97,12 +104,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/shape_rect_8_gray_fill"
+            android:background="@drawable/shape_rect_8_blue_100_fill"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <EditText
                 android:id="@+id/et_chat_input"
-                style="@style/Widget.AppCompat.EditText.LCK"
+                style="@style/TextAppearance.TUgether.Bold.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -114,7 +121,6 @@
                 android:paddingVertical="16dp"
                 android:paddingStart="18dp"
                 android:text=""
-                android:textAppearance="@style/Esamanru.Medium.body02"
                 android:textColor="@color/gray_200"
                 android:textColorHint="@color/gray_800"
                 app:layout_constraintBottom_toBottomOf="@id/iv_chat_send_btn"
@@ -127,7 +133,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_send_comment_btn"
+                android:src="@drawable/ic_send"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

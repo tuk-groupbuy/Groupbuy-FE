@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_chat_participant_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_chat_participant_topbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="채팅방 이름"
+                style="@style/TextAppearance.TUgether.Bold.Body1"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_chat_participant_topbar"
+                app:layout_constraintBottom_toBottomOf="@id/tv_chat_participant_topbar"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_chat_participant_user_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.TUgether.Bold.Body1"
+            android:text="대화 상대"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_chat_participant_topbar"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_chat_participant"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_chat_participant_user_list"
+            app:layout_constraintBottom_toTopOf="@+id/tv_chat_participant_exit_btn"/>
+
+        <TextView
+            android:id="@+id/tv_chat_participant_exit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="채팅방 나가기"
+            style="@style/TextAppearance.TUgether.Bold.Body1"
+            android:gravity="center"
+            android:background="@drawable/shape_rect_20_blue_300_fill"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

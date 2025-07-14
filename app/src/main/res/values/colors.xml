@@ -6,7 +6,11 @@
     <color name="warning">#F26E6E</color>
     <color name="gray_100">#FAFAFA</color>
     <color name="gray_200">#999999</color>
-
+    <color name="gray_700">#828282</color>
+    <color name="gray_600">#AEAEAE</color>
+    <color name="gray_500">#D9D9D9</color>
+    <color name="gray_800">#575757</color>
+    <color name="gray_900">#2B2B2B</color>
     <color name="blue_100">#EBEDF2</color>
     <color name="blue_200">#E8EDF5</color>
     <color name="blue_300">#DBE8F2</color>
