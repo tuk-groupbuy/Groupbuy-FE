@@ -72,4 +72,29 @@
         <item name="android:textColor">@color/blue_400</item>
         <item name="fontFamily">@font/pretendard_medium</item>
     </style>
+
+
+    <style name="JSG.DatePicker" parent="Theme.AppCompat.Light.Dialog">
+        <!-- 상단 Title 배경색 -->
+        <item name="colorAccent">@color/transparency</item>
+        <!-- 선택한 날짜 배경 색 -->
+        <item name="colorControlActivated">@color/blue_300</item>
+        <!-- Highlight item color-->
+        <item name="colorControlHighlight">@color/blue_300</item>
+        <!--Calender Background color -->
+        <item name="android:colorBackground">@color/white</item>
+        <!-- Week TextColor-->
+        <item name="android:textColorSecondary">@color/black_main</item>
+        <!-- Calender Number color arrow color (< >) -->
+        <item name="android:textColorPrimary">@color/black_main</item>
+        <!--day , month TextColor-->
+        <item name="android:textColorPrimaryInverse">@color/black_main</item>
+        <!-- year-->
+        <item name="android:textColorSecondaryInverse">@color/black_main</item>
+        <item name="android:textSize">0sp</item>
+        <item name="cornerSize">16dp</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+    </style>
 </resources>

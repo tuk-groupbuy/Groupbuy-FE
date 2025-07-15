@@ -18,4 +18,5 @@
     <color name="blue_400">#4A739C</color>
     <color name="transparency">#00ff0000</color>
     <color name="chat_message">#5C738A</color>
+    <color name="bottomsheet_background">#80000000</color>
 </resources>
