@@ -33,9 +33,9 @@
 
     <fragment
         android:id="@+id/postFragment"
-        android:name="com.tuk.tugether.presentation.post.PostFragment"
+        android:name="com.tuk.tugether.presentation.post.CreatePostFragment"
         android:label="PostFragment"
-        tools:layout="@layout/fragment_post"/>
+        tools:layout="@layout/fragment_create_post"/>
 
     <fragment
         android:id="@+id/profileFragment"

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- top bar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_topbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게시글 작성하기"
+                style="@style/TextAppearance.TUgether.Topbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_topbar_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_topbar"
+                app:layout_constraintBottom_toBottomOf="@id/tv_topbar"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 본문 -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_topbar"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/et_post_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="제품 이름"
+                    android:text=""
+                    android:textColorHint="@color/blue_400"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="12dp"/>
+
+                <View
+                    android:id="@+id/view_post_image"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:background="@drawable/shape_rect_20_white_fill_blue300_dash2_5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_post_title"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_post_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/view_post_image"
+                    app:layout_constraintEnd_toEndOf="@id/view_post_image"
+                    app:layout_constraintTop_toTopOf="@id/view_post_image"
+                    app:layout_constraintBottom_toBottomOf="@id/view_post_image">
+
+                    <TextView
+                        android:id="@+id/tv_post_image_head"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="사진 업로드"
+                        style="@style/TextAppearance.TUgether.Head1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_post_image_body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="공동구매 하고 싶은 제품의\n사진을 추가해주세요"
+                        style="@style/TextAppearance.TUgether.Body1"
+                        android:lineSpacingExtra="-4dp"
+                        android:gravity="center"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_image_head"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="6dp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_post_image_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_plus_btn"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_image_body"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="16dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <EditText
+                    android:id="@+id/et_post_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="가격"
+                    android:text=""
+                    android:textColorHint="@color/blue_400"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_post_image"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"/>
+
+                <EditText
+                    android:id="@+id/et_post_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="140dp"
+                    android:hint="상세설명"
+                    android:text=""
+                    android:textColorHint="@color/blue_400"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:gravity="left"
+                    android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_post_price"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"/>
+
+                <EditText
+                    android:id="@+id/et_post_minPersonnel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="최소 인원"
+                    android:text=""
+                    android:textColorHint="@color/blue_400"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/view_1"
+                    app:layout_constraintTop_toBottomOf="@id/et_post_description"
+                    android:padding="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"/>
+
+                <View
+                    android:id="@+id/view_1"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/et_post_minPersonnel"/>
+
+                <EditText
+                    android:id="@+id/et_post_maxPersonnel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="최대 인원"
+                    android:text=""
+                    android:textColorHint="@color/blue_400"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
+                    app:layout_constraintStart_toEndOf="@id/view_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_post_description"
+                    android:padding="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="24dp"/>
+
+                <TextView
+                    android:id="@+id/et_post_deadline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="모집 마감기한 (YYYY-MM-DD)"
+                    android:text=""
+                    android:textColorHint="@color/blue_400"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_post_minPersonnel"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="24dp"/>
+
+                <TextView
+                    android:id="@+id/tv_post_complete_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="작성 완료"
+                    style="@style/TextAppearance.TUgether.Bold.Body1"
+                    android:gravity="center"
+                    android:background="@drawable/shape_rect_999_blue300_fill"
+                    android:paddingVertical="12dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_post_deadline"/>
+
+                <View
+                    android:id="@+id/view_2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_post_complete_btn"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
