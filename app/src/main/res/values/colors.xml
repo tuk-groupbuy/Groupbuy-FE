@@ -5,7 +5,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="warning">#F26E6E</color>
     <color name="gray_100">#FAFAFA</color>
-    <color name="gray_200">#999999</color>
+    <color name="gray_200">#EDEDED</color>
+    <color name="gray_300">#999999</color>
 
     <color name="blue_100">#EBEDF2</color>
     <color name="blue_200">#E8EDF5</color>
