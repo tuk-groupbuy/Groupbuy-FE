@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:background="@color/white">
+        
+        <ImageView
+            android:id="@+id/iv_chat_room_thumbnail"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/ic_sample_img"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_chat_room_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.TUgether.Bold.Body1"
+            android:text="채팅방 제목 Chat Title"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toEndOf="@+id/iv_chat_room_thumbnail"
+            app:layout_constraintTop_toTopOf="@+id/iv_chat_room_thumbnail"/>
+
+        <TextView
+            android:id="@+id/tv_chat_room_recent_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.TUgether.Body1"
+            android:textSize="12sp"
+            android:textColor="@color/chat_message"
+            android:text="마지막 채팅 메시지 Last chat Message"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@+id/tv_chat_room_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_chat_room_name"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
