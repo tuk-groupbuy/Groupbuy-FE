@@ -16,7 +16,7 @@
             android:id="@+id/layout_chat_participant_topbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="15dp"
+            android:paddingVertical="20dp"
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
