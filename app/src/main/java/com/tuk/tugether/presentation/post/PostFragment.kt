@@ -27,8 +27,26 @@ class PostFragment: BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
         bottomNavigationView?.visibility = View.GONE
     }
 
-    private fun setClickListener(){
-        binding.ivTopbarBack.setOnClickListener { findNavController().popBackStack() }
+    private fun setClickListener() {
+        binding.ivTopbarBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        var isJoined = false
+
+        binding.tvPostJoinBtn.setOnClickListener {
+            isJoined = !isJoined
+
+            if (isJoined) {
+                binding.tvPostJoinBtn.text = "취소하기"
+                binding.tvPostJoinBtn.setBackgroundResource(R.drawable.shape_rect_999_blue400_fill)
+                binding.tvPostJoinBtn.setTextColor(requireContext().getColor(R.color.white))
+            } else {
+                binding.tvPostJoinBtn.text = "참여하기"
+                binding.tvPostJoinBtn.setBackgroundResource(R.drawable.shape_rect_999_blue300_fill)
+                binding.tvPostJoinBtn.setTextColor(requireContext().getColor(R.color.black_main))
+            }
+        }
     }
 
 }
