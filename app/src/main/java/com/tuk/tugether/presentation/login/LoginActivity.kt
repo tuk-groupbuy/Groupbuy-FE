@@ -15,7 +15,7 @@ import com.tuk.tugether.R
 import com.tuk.tugether.databinding.ActivityLoginBinding
 import com.tuk.tugether.presentation.MainActivity
 import com.tuk.tugether.presentation.base.BaseActivity
-import com.tuk.tugether.presentation.singup.SignupActivity
+import com.tuk.tugether.presentation.signup.SignupActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 

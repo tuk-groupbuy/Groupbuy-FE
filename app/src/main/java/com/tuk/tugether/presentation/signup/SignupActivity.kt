@@ -1,4 +1,4 @@
-package com.tuk.tugether.presentation.singup
+package com.tuk.tugether.presentation.signup
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
