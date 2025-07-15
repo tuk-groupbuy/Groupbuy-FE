@@ -121,7 +121,7 @@
                 android:paddingVertical="16dp"
                 android:paddingStart="18dp"
                 android:text=""
-                android:textColor="@color/gray_200"
+                android:textColor="@color/gray_800"
                 android:textColorHint="@color/gray_800"
                 app:layout_constraintBottom_toBottomOf="@id/iv_chat_send_btn"
                 app:layout_constraintEnd_toStartOf="@id/iv_chat_send_btn"
