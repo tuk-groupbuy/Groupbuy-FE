@@ -16,6 +16,9 @@
             <action
                 android:id="@+id/goToAlarm"
                 app:destination="@id/alarmFragment" />
+            <action
+                android:id="@+id/goToPost"
+                app:destination="@id/postFragment" />
         </fragment>
         <fragment
             android:id="@+id/alarmFragment"
@@ -25,18 +28,31 @@
 
     </navigation>
 
+    <!-- chat tab -->
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.tuk.tugether.presentation.chat.ChatFragment"
         android:label="ChatFragment"
         tools:layout="@layout/fragment_chat"/>
 
+    <!-- post tab -->
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.tuk.tugether.presentation.post.CreatePostFragment"
+        android:label="CreatePostFragment"
+        tools:layout="@layout/fragment_create_post">
+        <action
+            android:id="@+id/goToPost"
+            app:destination="@id/postFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/postFragment"
-        android:name="com.tuk.tugether.presentation.post.CreatePostFragment"
+        android:name="com.tuk.tugether.presentation.post.PostFragment"
         android:label="PostFragment"
-        tools:layout="@layout/fragment_create_post"/>
+        tools:layout="@layout/fragment_post"/>
 
+    <!-- profile tab -->
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.tuk.tugether.presentation.profile.ProfileFragment"

@@ -90,7 +90,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun observePostList() {
         viewModel.postList.observe(viewLifecycleOwner) { posts ->
             postAdapter = PostAdapter(posts) { post ->
-                Toast.makeText(requireContext(), "Clicked: ${post.title}", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.goToPost)
             }
             binding.rvHomePicture.adapter = postAdapter
         }
