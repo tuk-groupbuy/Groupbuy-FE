@@ -54,7 +54,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/et_post_title"
+                    android:id="@+id/et_createPost_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="제품 이름"
@@ -73,28 +73,28 @@
                     android:layout_marginTop="12dp"/>
 
                 <View
-                    android:id="@+id/view_post_image"
+                    android:id="@+id/view_createPost_image"
                     android:layout_width="0dp"
                     android:layout_height="250dp"
                     android:background="@drawable/shape_rect_20_white_fill_blue300_dash2_5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_post_title"
+                    app:layout_constraintTop_toBottomOf="@id/et_createPost_title"
                     android:padding="16dp"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="24dp"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_post_image"
+                    android:id="@+id/cl_createPost_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/view_post_image"
-                    app:layout_constraintEnd_toEndOf="@id/view_post_image"
-                    app:layout_constraintTop_toTopOf="@id/view_post_image"
-                    app:layout_constraintBottom_toBottomOf="@id/view_post_image">
+                    app:layout_constraintStart_toStartOf="@id/view_createPost_image"
+                    app:layout_constraintEnd_toEndOf="@id/view_createPost_image"
+                    app:layout_constraintTop_toTopOf="@id/view_createPost_image"
+                    app:layout_constraintBottom_toBottomOf="@id/view_createPost_image">
 
                     <TextView
-                        android:id="@+id/tv_post_image_head"
+                        android:id="@+id/tv_createPost_image_head"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="사진 업로드"
@@ -104,24 +104,24 @@
                         app:layout_constraintEnd_toEndOf="parent"/>
 
                     <TextView
-                        android:id="@+id/tv_post_image_body"
+                        android:id="@+id/tv_createPost_image_body"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="공동구매 하고 싶은 제품의\n사진을 추가해주세요"
                         style="@style/TextAppearance.TUgether.Body1"
                         android:lineSpacingExtra="-4dp"
                         android:gravity="center"
-                        app:layout_constraintTop_toBottomOf="@id/tv_post_image_head"
+                        app:layout_constraintTop_toBottomOf="@id/tv_createPost_image_head"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginTop="6dp"/>
 
                     <ImageView
-                        android:id="@+id/iv_post_image_btn"
+                        android:id="@+id/iv_createPost_image_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_plus_btn"
-                        app:layout_constraintTop_toBottomOf="@id/tv_post_image_body"
+                        app:layout_constraintTop_toBottomOf="@id/tv_createPost_image_body"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +129,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <EditText
-                    android:id="@+id/et_post_price"
+                    android:id="@+id/et_createPost_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="가격"
@@ -143,13 +143,13 @@
                     android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_post_image"
+                    app:layout_constraintTop_toBottomOf="@id/view_createPost_image"
                     android:padding="16dp"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="24dp"/>
 
                 <EditText
-                    android:id="@+id/et_post_description"
+                    android:id="@+id/et_createPost_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:minHeight="140dp"
@@ -162,13 +162,13 @@
                     android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_post_price"
+                    app:layout_constraintTop_toBottomOf="@id/et_createPost_price"
                     android:padding="16dp"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="24dp"/>
 
                 <EditText
-                    android:id="@+id/et_post_minPersonnel"
+                    android:id="@+id/et_createPost_minPersonnel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="최소 인원"
@@ -181,7 +181,7 @@
                     android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/view_1"
-                    app:layout_constraintTop_toBottomOf="@id/et_post_description"
+                    app:layout_constraintTop_toBottomOf="@id/et_createPost_description"
                     android:padding="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"/>
@@ -192,10 +192,10 @@
                     android:layout_height="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/et_post_minPersonnel"/>
+                    app:layout_constraintTop_toTopOf="@id/et_createPost_minPersonnel"/>
 
                 <EditText
-                    android:id="@+id/et_post_maxPersonnel"
+                    android:id="@+id/et_createPost_maxPersonnel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="최대 인원"
@@ -208,13 +208,13 @@
                     android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
                     app:layout_constraintStart_toEndOf="@id/view_1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_post_description"
+                    app:layout_constraintTop_toBottomOf="@id/et_createPost_description"
                     android:padding="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="24dp"/>
 
                 <TextView
-                    android:id="@+id/et_post_deadline"
+                    android:id="@+id/et_createPost_deadline"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="모집 마감기한 (YYYY-MM-DD)"
@@ -227,13 +227,13 @@
                     android:background="@drawable/shape_rect_20_gray100_fill_blue300_line_1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_post_minPersonnel"
+                    app:layout_constraintTop_toBottomOf="@id/et_createPost_minPersonnel"
                     android:padding="16dp"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="24dp"/>
 
                 <TextView
-                    android:id="@+id/tv_post_complete_btn"
+                    android:id="@+id/tv_createPost_complete_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="작성 완료"
@@ -245,14 +245,14 @@
                     android:layout_marginTop="30dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_post_deadline"/>
+                    app:layout_constraintTop_toBottomOf="@id/et_createPost_deadline"/>
 
                 <View
                     android:id="@+id/view_2"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_complete_btn"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_createPost_complete_btn"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
