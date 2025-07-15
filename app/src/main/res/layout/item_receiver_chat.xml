@@ -65,7 +65,7 @@
         android:maxWidth="280dp"
         android:paddingHorizontal="12dp"
         android:paddingVertical="12dp"
-        style="@style/TextAppearance.TUgether.Body1"
+        android:fontFamily="@font/pretendard_medium"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tv_receiver_nickname"
         app:layout_constraintTop_toBottomOf="@id/tv_receiver_nickname"
