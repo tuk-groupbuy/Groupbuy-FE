@@ -1,6 +1,7 @@
 package com.tuk.tugether.presentation.post
 
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,19 +14,22 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragment_create_post) {
 
+    private val selectImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        uri?.let {
+            binding.ivCreatePostImage.setImageURI(it)
+            binding.clCreatePostImage.visibility = View.GONE
+        }
+    }
+
     override fun initView() {
         bottomNavigationRemove()
         setClickListener()
     }
 
-    override fun initObserver() {
+    override fun initObserver() {}
 
-    }
-
-    // BottomNavigationView 숨기기
     private fun bottomNavigationRemove() {
-        val bottomNavigationView =
-            requireActivity().findViewById<BottomNavigationView>(R.id.main_bnv)
+        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.main_bnv)
         bottomNavigationView?.visibility = View.GONE
     }
 
@@ -34,10 +38,13 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.createPostFragment, true)
                 .build()
-
             findNavController().navigate(R.id.goToPost, null, navOptions)
         }
 
         binding.ivTopbarBack.setOnClickListener { findNavController().popBackStack() }
+
+        binding.ivCreatePostImageBtn.setOnClickListener {
+            selectImageLauncher.launch("image/*")
+        }
     }
 }
