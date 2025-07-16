@@ -74,9 +74,22 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun fetchChatRoomList(request: CreateChatRequestModel) {
+//    fun fetchChatRoomList(request: CreateChatRequestModel) {
+//        viewModelScope.launch {
+//            chatRepository.fetchChatRoomList(request)
+//                .onSuccess { response ->
+//                    Log.d("ChatViewModel", "채팅방 목록 성공: $response")
+//                    _chatRoomList.value = response.requestChatRoomSaveDTOS
+//                }
+//                .onFailure {
+//                    Log.e("ChatViewModel", "채팅방 목록 실패: ${it.message}")
+//                }
+//        }
+//    }
+
+    fun fetchChatRoomList(userId: Long) {
         viewModelScope.launch {
-            chatRepository.fetchChatRoomList(request)
+            chatRepository.fetchChatRoomList(userId)
                 .onSuccess { response ->
                     Log.d("ChatViewModel", "채팅방 목록 성공: $response")
                     _chatRoomList.value = response.requestChatRoomSaveDTOS

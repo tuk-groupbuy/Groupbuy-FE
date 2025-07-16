@@ -27,9 +27,11 @@ class ChatDataSourceImpl @Inject constructor(
     override suspend fun fetchCreateChatRoom(request: CreateChatRequestDto): ChatResponse<CreateChatResponseDto> =
         chatService.fetchCreateChatRoom(request)
 
-    override suspend fun fetchChatRoomList(request: CreateChatRequestDto): ChatResponse<ChatListResponseDto> =
-        chatService.fetchChatRoomList(request)
+//    override suspend fun fetchChatRoomList(request: CreateChatRequestDto): ChatResponse<ChatListResponseDto> =
+//        chatService.fetchChatRoomList(request)
+    override suspend fun fetchChatRoomList(userId: Long): ChatResponse<ChatListResponseDto> =
+        chatService.fetchChatRoomList(userId)
 
-    override suspend fun fetchChatMessage(): ChatResponse<ChatMessageResponseDto> =
-        chatService.fetchChatMessage()
+    override suspend fun fetchChatMessage(chatRoomId: Long): ChatResponse<ChatMessageResponseDto> =
+        chatService.fetchChatMessage(chatRoomId)
 }

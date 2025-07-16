@@ -13,6 +13,7 @@ interface ChatRepository {
     suspend fun fetchJoinChat(request: CommonChatRequestModel): Result<CommonChatResponseModel>
     suspend fun fetchExitChatRoom(request: CommonChatRequestModel): Result<CommonChatResponseModel>
     suspend fun fetchCreateChatRoom(request: CreateChatRequestModel): Result<CreateChatResponseModel>
-    suspend fun fetchChatRoomList(request: CreateChatRequestModel): Result<ChatListResponseModel>
-    suspend fun fetchChatMessage(): Result<ChatMessageResponseModel>
+//    suspend fun fetchChatRoomList(request: CreateChatRequestModel): Result<ChatListResponseModel>
+    suspend fun fetchChatRoomList(userId: Long): Result<ChatListResponseModel>
+    suspend fun fetchChatMessage(chatRoomId: Long): Result<ChatMessageResponseModel>
 }

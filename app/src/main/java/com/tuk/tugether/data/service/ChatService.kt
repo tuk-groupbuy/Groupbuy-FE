@@ -13,6 +13,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ChatService {
     // 채팅방 참여자 조회
@@ -40,13 +41,19 @@ interface ChatService {
     ): ChatResponse<CreateChatResponseDto>
 
     // 채팅방 목록 조회
-    @GET("chat/room/all")
+    @GET("chat/room/all/{userId}")
     suspend fun fetchChatRoomList(
-        @Body request: CreateChatRequestDto
+        @Path("userId") userId: Long
     ): ChatResponse<ChatListResponseDto>
+
+//    @GET("chat/room/all")
+//    suspend fun fetchChatRoomList(
+//        @Body request: CreateChatRequestDto
+//    ): ChatResponse<ChatListResponseDto>
 
     // 채팅방 메세지 조회
     @GET("chat/message/{chatRoomId}")
-    suspend fun fetchChatMessage(): ChatResponse<ChatMessageResponseDto>
-
+    suspend fun fetchChatMessage(
+        @Path("chatRoomId") chatRoomId: Long
+    ): ChatResponse<ChatMessageResponseDto>
 }

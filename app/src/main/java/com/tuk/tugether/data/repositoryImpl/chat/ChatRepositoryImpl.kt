@@ -30,12 +30,17 @@ class ChatRepositoryImpl @Inject constructor(
         chatDataSource.fetchCreateChatRoom(request.toCreateChatRequestDto()).data.toCreateChatResponseModel()
     }
 
-    override suspend fun fetchChatRoomList(request: CreateChatRequestModel): Result<ChatListResponseModel> = runCatching {
-        chatDataSource.fetchChatRoomList(request.toCreateChatRequestDto()).data.toChatListResponseModel()
+//    override suspend fun fetchChatRoomList(request: CreateChatRequestModel): Result<ChatListResponseModel> = runCatching {
+//        chatDataSource.fetchChatRoomList(request.toCreateChatRequestDto()).data.toChatListResponseModel()
+//    }
+
+    override suspend fun fetchChatRoomList(userId: Long): Result<ChatListResponseModel> = runCatching {
+        chatDataSource.fetchChatRoomList(userId).data.toChatListResponseModel()
     }
 
-    override suspend fun fetchChatMessage(): Result<ChatMessageResponseModel> = runCatching {
-        chatDataSource.fetchChatMessage().data.toChatMessageResponseModel()
+
+    override suspend fun fetchChatMessage(chatRoomId: Long): Result<ChatMessageResponseModel> = runCatching {
+        chatDataSource.fetchChatMessage(chatRoomId).data.toChatMessageResponseModel()
     }
 
 }

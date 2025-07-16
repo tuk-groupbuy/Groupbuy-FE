@@ -14,6 +14,7 @@ interface ChatDataSource {
     suspend fun fetchJoinChat(request: CommonChatRequestDto): ChatResponse<CommonChatResponseDto>
     suspend fun fetchExitChatRoom(request: CommonChatRequestDto): ChatResponse<CommonChatResponseDto>
     suspend fun fetchCreateChatRoom(request: CreateChatRequestDto): ChatResponse<CreateChatResponseDto>
-    suspend fun fetchChatRoomList(request: CreateChatRequestDto): ChatResponse<ChatListResponseDto>
-    suspend fun fetchChatMessage(): ChatResponse<ChatMessageResponseDto>
+//    suspend fun fetchChatRoomList(request: CreateChatRequestDto): ChatResponse<ChatListResponseDto>
+    suspend fun fetchChatRoomList(userId: Long): ChatResponse<ChatListResponseDto>
+    suspend fun fetchChatMessage(chatRoomId: Long): ChatResponse<ChatMessageResponseDto>
 }
