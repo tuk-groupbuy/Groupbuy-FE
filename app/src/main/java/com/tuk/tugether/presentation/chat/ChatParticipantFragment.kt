@@ -4,7 +4,9 @@ import android.view.View
 import com.tuk.tugether.R
 import com.tuk.tugether.databinding.FragmentChatParticipantBinding
 import com.tuk.tugether.presentation.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChatParticipantFragment: BaseFragment<FragmentChatParticipantBinding>(R.layout.fragment_chat_participant) {
 
     override fun initObserver() {

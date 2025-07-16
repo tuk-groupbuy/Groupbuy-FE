@@ -37,9 +37,11 @@
             android:id="@+id/rv_chat_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:listitem="@layout/item_chat_room_list"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_chat_topbar"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp"
+            tools:listitem="@layout/item_chat_room_list" />
 
         <TextView
             android:id="@+id/tv_gotochat"
