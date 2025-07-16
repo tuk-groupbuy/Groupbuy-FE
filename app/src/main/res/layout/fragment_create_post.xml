@@ -68,9 +68,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:padding="16dp"
+                    android:paddingVertical="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="60dp"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="12dp"/>
+
+                <TextView
+                    android:id="@+id/tv_createPost_title_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    style="@style/TextAppearance.TUgether.Body3"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="@id/et_createPost_title"
+                    app:layout_constraintBottom_toBottomOf="@id/et_createPost_title"
+                    app:layout_constraintEnd_toStartOf="@id/tv_createPost_title_count_max"/>
+
+                <TextView
+                    android:id="@+id/tv_createPost_title_count_max"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/30"
+                    style="@style/TextAppearance.TUgether.Body3"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="@id/et_createPost_title"
+                    app:layout_constraintBottom_toBottomOf="@id/et_createPost_title"
+                    app:layout_constraintEnd_toEndOf="@id/et_createPost_title"
+                    android:layout_marginEnd="16dp"/>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_createPost_image"

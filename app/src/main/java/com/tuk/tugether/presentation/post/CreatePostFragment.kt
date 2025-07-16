@@ -1,11 +1,14 @@
 package com.tuk.tugether.presentation.post
 
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,6 +19,8 @@ import com.tuk.tugether.presentation.base.BaseFragment
 import com.tuk.tugether.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragment_create_post) {
@@ -29,6 +34,7 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun initView() {
         bottomNavigationRemove()
         setClickListener()
@@ -36,6 +42,7 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         initBottomSheetActions()
         setupPriceFormatting()
         handleOnBackPressed()
+        setupTitleLengthLimit()
     }
 
     override fun initObserver() {}
@@ -53,22 +60,95 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         bottomNavigationView?.visibility = View.GONE
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setClickListener() {
         binding.tvCreatePostCompleteBtn.setOnSingleClickListener {
+            if (!isFormValid()) return@setOnSingleClickListener
+
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.createPostFragment, true)
                 .build()
             findNavController().navigate(R.id.goToPost, null, navOptions)
         }
 
-        binding.ivTopbarBack.setOnClickListener { findNavController().popBackStack() }
+        binding.ivTopbarBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         binding.cvCreatePostImage.setOnClickListener {
             selectImageLauncher.launch("image/*")
         }
 
-        binding.tvCreatePostDeadline.setOnClickListener { toggleBottomSheetState(dateBottomSheetBehavior) }
+        binding.tvCreatePostDeadline.setOnClickListener {
+            toggleBottomSheetState(dateBottomSheetBehavior)
+        }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun isFormValid(): Boolean {
+        val title = binding.etCreatePostTitle.text.toString().trim()
+        val priceText = binding.etCreatePostPrice.text.toString().replace("[^\\d]".toRegex(), "")
+        val description = binding.etCreatePostDescription.text.toString().trim()
+        val minText = binding.etCreatePostMinPersonnel.text.toString().trim()
+        val maxText = binding.etCreatePostMaxPersonnel.text.toString().trim()
+        val deadlineText = binding.tvCreatePostDeadline.text.toString().trim()
+        val hasImage = binding.ivCreatePostImage.drawable != null
+
+        // 필수 항목 검사
+        if (title.isEmpty() || priceText.isEmpty() || description.isEmpty()
+            || minText.isEmpty() || maxText.isEmpty() || deadlineText.isEmpty() || !hasImage
+        ) {
+            Toast.makeText(requireContext(), "모든 항목을 입력해주세요", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (description.length > 500) {
+            Toast.makeText(requireContext(), "상세설명은 최대 500자까지 입력 가능합니다", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        // 숫자 변환
+        val price = priceText.toIntOrNull()
+        val min = minText.toIntOrNull()
+        val max = maxText.toIntOrNull()
+
+        if (price == null || min == null || max == null) {
+            Toast.makeText(requireContext(), "가격과 인원수는 숫자로 입력해주세요", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (price < 1000 || price > 1_000_000) {
+            Toast.makeText(requireContext(), "가격은 1,000원 이상 1,000,000원 이하로 입력해주세요", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (min < 1 || min > 100 || max < 1 || max > 100) {
+            Toast.makeText(requireContext(), "인원수는 1명 이상 100명 이하로 입력해주세요", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (min > max) {
+            Toast.makeText(requireContext(), "최소 인원이 최대 인원보다 많을 수 없습니다", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        // 마감기한 검사
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val today = LocalDate.now()
+        val deadline = try {
+            LocalDate.parse(deadlineText, formatter)
+        } catch (e: Exception) {
+            null
+        }
+
+        if (deadline == null || deadline.isBefore(today)) {
+            Toast.makeText(requireContext(), "마감기한은 오늘 이후로 선택해주세요", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
+    }
+
 
     private fun initBottomSheets() {
         dateBottomSheetBehavior = createBottomSheet(binding.clBottomSheetDate)
@@ -144,4 +224,29 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
             }
         })
     }
+
+    // 제목 글자수 세기
+    private fun setupTitleLengthLimit() {
+        val maxLength = 30
+
+        binding.etCreatePostTitle.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val text = s.toString()
+
+                if (text.length > maxLength) {
+                    // 초과된 문자 제거
+                    val trimmed = text.substring(0, maxLength)
+                    binding.etCreatePostTitle.setText(trimmed)
+                    binding.etCreatePostTitle.setSelection(trimmed.length) // 커서를 맨 뒤로 이동
+                }
+
+                binding.tvCreatePostTitleCount.text = minOf(text.length, maxLength).toString()
+            }
+        })
+    }
+
 }
