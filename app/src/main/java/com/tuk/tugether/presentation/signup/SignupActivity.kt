@@ -1,18 +1,16 @@
 package com.tuk.tugether.presentation.signup
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.tuk.tugether.R
 import com.tuk.tugether.databinding.ActivitySignupBinding
+import com.tuk.tugether.presentation.base.BaseActivity
 
-class SignupActivity : AppCompatActivity() {
+class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_signup) {
 
-    private lateinit var binding: ActivitySignupBinding
+    override fun initView() {
+        // 회원가입 관련 초기 UI 설정
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySignupBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // 예: 회원가입 관련 UI/로직 추가 예정
+    override fun initObserver() {
+        // LiveData 관찰 등 옵저버 연결
     }
 }
