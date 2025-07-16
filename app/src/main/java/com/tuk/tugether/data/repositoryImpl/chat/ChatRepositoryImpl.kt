@@ -15,19 +15,19 @@ class ChatRepositoryImpl @Inject constructor(
     private val chatDataSource: ChatDataSource
 ): ChatRepository {
     override suspend fun fetchChatParticipantUserList(chatRoomId: Long): Result<ParticipantListResponseModel> = runCatching {
-        chatDataSource.fetchChatParticipantUserList(chatRoomId).data.toParticipantListResponseModel()
+        chatDataSource.fetchChatParticipantUserList(chatRoomId).toParticipantListResponseModel()
     }
 
     override suspend fun fetchJoinChat(request: CommonChatRequestModel): Result<CommonChatResponseModel> = runCatching {
-        chatDataSource.fetchJoinChat(request.toCommonChatRequestDto()).data.toJoinChatResponseModel()
+        chatDataSource.fetchJoinChat(request.toCommonChatRequestDto()).toJoinChatResponseModel()
     }
 
     override suspend fun fetchExitChatRoom(request: CommonChatRequestModel): Result<CommonChatResponseModel> = runCatching {
-        chatDataSource.fetchExitChatRoom(request.toCommonChatRequestDto()).data.toJoinChatResponseModel()
+        chatDataSource.fetchExitChatRoom(request.toCommonChatRequestDto()).toJoinChatResponseModel()
     }
 
     override suspend fun fetchCreateChatRoom(request: CreateChatRequestModel): Result<CreateChatResponseModel> = runCatching {
-        chatDataSource.fetchCreateChatRoom(request.toCreateChatRequestDto()).data.toCreateChatResponseModel()
+        chatDataSource.fetchCreateChatRoom(request.toCreateChatRequestDto()).toCreateChatResponseModel()
     }
 
 //    override suspend fun fetchChatRoomList(request: CreateChatRequestModel): Result<ChatListResponseModel> = runCatching {
@@ -35,12 +35,12 @@ class ChatRepositoryImpl @Inject constructor(
 //    }
 
     override suspend fun fetchChatRoomList(userId: Long): Result<ChatListResponseModel> = runCatching {
-        chatDataSource.fetchChatRoomList(userId).data.toChatListResponseModel()
+        chatDataSource.fetchChatRoomList(userId).toChatListResponseModel()
     }
 
 
     override suspend fun fetchChatMessage(chatRoomId: Long): Result<ChatMessageResponseModel> = runCatching {
-        chatDataSource.fetchChatMessage(chatRoomId).data.toChatMessageResponseModel()
+        chatDataSource.fetchChatMessage(chatRoomId).toChatMessageResponseModel()
     }
 
 }

@@ -15,23 +15,23 @@ import javax.inject.Inject
 class ChatDataSourceImpl @Inject constructor(
     private val chatService: ChatService
 ): ChatDataSource {
-    override suspend fun fetchChatParticipantUserList(chatRoomId: Long): ChatResponse<ParticipantListResponseDto> =
+    override suspend fun fetchChatParticipantUserList(chatRoomId: Long): ParticipantListResponseDto =
         chatService.fetchChatParticipantUserList(chatRoomId)
 
-    override suspend fun fetchJoinChat(request: CommonChatRequestDto): ChatResponse<CommonChatResponseDto> =
+    override suspend fun fetchJoinChat(request: CommonChatRequestDto): CommonChatResponseDto =
         chatService.fetchJoinChat(request)
 
-    override suspend fun fetchExitChatRoom(request: CommonChatRequestDto): ChatResponse<CommonChatResponseDto> =
+    override suspend fun fetchExitChatRoom(request: CommonChatRequestDto): CommonChatResponseDto =
         chatService.fetchExitChatRoom(request)
 
-    override suspend fun fetchCreateChatRoom(request: CreateChatRequestDto): ChatResponse<CreateChatResponseDto> =
+    override suspend fun fetchCreateChatRoom(request: CreateChatRequestDto): CreateChatResponseDto =
         chatService.fetchCreateChatRoom(request)
 
-//    override suspend fun fetchChatRoomList(request: CreateChatRequestDto): ChatResponse<ChatListResponseDto> =
+//    override suspend fun fetchChatRoomList(request: CreateChatRequestDto): ChatListResponseDto =
 //        chatService.fetchChatRoomList(request)
-    override suspend fun fetchChatRoomList(userId: Long): ChatResponse<ChatListResponseDto> =
+    override suspend fun fetchChatRoomList(userId: Long): ChatListResponseDto =
         chatService.fetchChatRoomList(userId)
 
-    override suspend fun fetchChatMessage(chatRoomId: Long): ChatResponse<ChatMessageResponseDto> =
+    override suspend fun fetchChatMessage(chatRoomId: Long): ChatMessageResponseDto =
         chatService.fetchChatMessage(chatRoomId)
 }

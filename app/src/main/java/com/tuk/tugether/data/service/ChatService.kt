@@ -20,31 +20,31 @@ interface ChatService {
     @GET("chat/room/user/all/{chatRoomId}")
     suspend fun fetchChatParticipantUserList(
         @Path("chatRoomId") chatRoomId: Long
-    ): ChatResponse<ParticipantListResponseDto>
+    ): ParticipantListResponseDto
 
     // 채팅방 참여
     @POST("chat/room/user/join")
     suspend fun fetchJoinChat(
         @Body request: CommonChatRequestDto
-    ): ChatResponse<CommonChatResponseDto>
+    ): CommonChatResponseDto
 
     // 채팅방 나가기
     @DELETE("chat/room/user")
     suspend fun fetchExitChatRoom(
         @Body request: CommonChatRequestDto
-        ): ChatResponse<CommonChatResponseDto>
+        ): CommonChatResponseDto
 
     // 채팅방 생성
     @POST("chat/room")
     suspend fun fetchCreateChatRoom(
         @Body request: CreateChatRequestDto
-    ): ChatResponse<CreateChatResponseDto>
+    ): CreateChatResponseDto
 
     // 채팅방 목록 조회
     @GET("chat/room/all/{userId}")
     suspend fun fetchChatRoomList(
         @Path("userId") userId: Long
-    ): ChatResponse<ChatListResponseDto>
+    ): ChatListResponseDto
 
 //    @GET("chat/room/all")
 //    suspend fun fetchChatRoomList(
@@ -55,5 +55,5 @@ interface ChatService {
     @GET("chat/message/{chatRoomId}")
     suspend fun fetchChatMessage(
         @Path("chatRoomId") chatRoomId: Long
-    ): ChatResponse<ChatMessageResponseDto>
+    ): ChatMessageResponseDto
 }

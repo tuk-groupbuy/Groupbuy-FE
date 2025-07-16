@@ -3,6 +3,8 @@ package com.tuk.tugether.data.dto.response.chat
 import com.tuk.tugether.domain.model.response.ParticipantListResponseModel
 
 data class ParticipantListResponseDto(
+    val success: Boolean,
+    val message: String,
     val responseChatRoomUserGetDTOS: List<ChatRoomUserDto>
 ) {
     data class ChatRoomUserDto(
@@ -14,5 +16,5 @@ data class ParticipantListResponseDto(
     }
 
     fun toParticipantListResponseModel() =
-        ParticipantListResponseModel(responseChatRoomUserGetDTOS.map { it.toChatRoomUserModel() })
+        ParticipantListResponseModel(success, message, responseChatRoomUserGetDTOS.map { it.toChatRoomUserModel() })
 }

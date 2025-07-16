@@ -1,6 +1,8 @@
 package com.tuk.tugether.domain.model.response
 
 data class ChatListResponseModel(
+    val success: Boolean,
+    val message: String,
     val requestChatRoomSaveDTOS: List<ChatRoomModel>
 ) {
     data class ChatRoomModel(
