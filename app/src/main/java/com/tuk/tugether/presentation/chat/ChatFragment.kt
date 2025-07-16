@@ -1,6 +1,7 @@
 package com.tuk.tugether.presentation.chat
 
 import android.content.Intent
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tuk.tugether.presentation.base.BaseFragment
@@ -31,16 +32,19 @@ class ChatFragment: BaseFragment<FragmentChatBinding>(R.layout.fragment_chat) {
         val userId = 6L // 로그인 전 하드코딩된 ID
         viewModel.fetchChatRoomList(userId)
 
-//        binding.tvGotochat.setOnClickListener {
-//            val intent = Intent(requireContext(), ChatRoomActivity::class.java)
-//            startActivity(intent)
-//        }
+        binding.tvGotochat.setOnClickListener {
+            val intent = Intent(requireContext(), ChatRoomActivity::class.java)
+            val chatRoomId = intent.putExtra("chatRoomId", 5L) // 임시로 5L 전달
+            Log.d("chatFragment", "ChatFragment -> ChatRoom $chatRoomId")
+            startActivity(intent)
+        }
     }
 
     private fun initRecyclerView() {
         chatRoomRVA = ChatRoomRVA { chatRoomId ->
             val intent = Intent(requireContext(), ChatRoomActivity::class.java).apply {
                 putExtra("chatRoomId", chatRoomId)
+                Log.d("chatFragment", "ChatFragment -> ChatRoom $chatRoomId")
             }
             startActivity(intent)
         }

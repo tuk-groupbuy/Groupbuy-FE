@@ -35,6 +35,10 @@ class ChatViewModel @Inject constructor(
     private val _chatMessages = MutableLiveData<List<ChatMessageResponseModel.ChatMessageModel>>()
     val chatMessages: LiveData<List<ChatMessageResponseModel.ChatMessageModel>> = _chatMessages
 
+    private val _chatRoomId = MutableLiveData<Long>()
+    val chatRoomId: LiveData<Long> get() = _chatRoomId
+
+
     fun fetchParticipantList(chatRoomId: Long) {
         viewModelScope.launch {
             chatRepository.fetchChatParticipantUserList(chatRoomId)
@@ -100,9 +104,9 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun fetchChatMessage() {
+    fun fetchChatMessage(chatRoomId: Long) {
         viewModelScope.launch {
-            chatRepository.fetchChatMessage()
+            chatRepository.fetchChatMessage(chatRoomId)
                 .onSuccess { response ->
                     Log.d("ChatViewModel", "채팅 메시지 조회 성공: $response")
                     _chatMessages.value = response.messages
@@ -111,5 +115,10 @@ class ChatViewModel @Inject constructor(
                     Log.e("ChatViewModel", "채팅 메시지 조회 실패: ${it.message}")
                 }
         }
+    }
+
+    fun setChatRoomId(id: Long) {
+        Log.d("ChatViewModel", "채팅방 ID : $id")
+        _chatRoomId.value = id
     }
 }
