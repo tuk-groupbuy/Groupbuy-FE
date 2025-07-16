@@ -2,6 +2,7 @@ package com.tuk.tugether.presentation.login
 
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Bundle // Bundle import 유지
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
@@ -10,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen // SplashScreen import 유지
 import androidx.core.widget.doAfterTextChanged
 import com.tuk.tugether.R
 import com.tuk.tugether.databinding.ActivityLoginBinding
@@ -20,6 +22,21 @@ import com.tuk.tugether.presentation.signup.SignupActivity
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
     private val loginViewModel: LoginViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        val splashScreen = installSplashScreen()
+
+        super.onCreate(savedInstanceState)
+
+        splashScreen.setKeepOnScreenCondition {
+            false // 초기 로딩이 완료된 것으로 간주하고 스플래시 화면을 바로 닫습니다.
+        }
+
+        // 나머지 초기화는 기존과 동일하게 initView()와 initObserver()에서 진행
+        initView()
+        initObserver()
+    }
 
     override fun initView() {
         setSignUpText()
