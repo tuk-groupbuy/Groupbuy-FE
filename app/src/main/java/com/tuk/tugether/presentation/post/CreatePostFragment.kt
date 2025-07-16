@@ -1,5 +1,7 @@
 package com.tuk.tugether.presentation.post
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,6 +14,7 @@ import com.tuk.tugether.databinding.FragmentCreatePostBinding
 import com.tuk.tugether.presentation.base.BaseFragment
 import com.tuk.tugether.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragment_create_post) {
@@ -30,6 +33,7 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         setClickListener()
         initBottomSheets()
         initBottomSheetActions()
+        setupPriceFormatting()
     }
 
     override fun initObserver() {}
@@ -49,7 +53,7 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
 
         binding.ivTopbarBack.setOnClickListener { findNavController().popBackStack() }
 
-        binding.ivCreatePostImageBtn.setOnClickListener {
+        binding.cvCreatePostImage.setOnClickListener {
             selectImageLauncher.launch("image/*")
         }
 
@@ -94,5 +98,38 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
             dateBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
+    }
+
+    private fun setupPriceFormatting() {
+        binding.etCreatePostPrice.addTextChangedListener(object : TextWatcher {
+            private var isEditing = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (isEditing) return
+
+                isEditing = true
+
+                val digitsOnly = s.toString().replace("[^\\d]".toRegex(), "")
+
+                if (digitsOnly.isNotEmpty()) {
+                    try {
+                        val parsed = digitsOnly.toLong()
+                        val formatted = "₩ " + DecimalFormat("#,###").format(parsed)
+                        binding.etCreatePostPrice.setText(formatted)
+                        binding.etCreatePostPrice.setSelection(formatted.length)
+                    } catch (e: NumberFormatException) {
+                        // 무시
+                    }
+                } else {
+                    binding.etCreatePostPrice.setText("")
+                }
+
+                isEditing = false
+            }
+        })
     }
 }
