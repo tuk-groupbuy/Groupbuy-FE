@@ -1,6 +1,7 @@
 package com.tuk.tugether.presentation.post
 
 import android.view.View
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tuk.tugether.R
@@ -14,17 +15,23 @@ class PostFragment: BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
     override fun initView() {
         bottomNavigationRemove()
         setClickListener()
+        handleOnBackPressed()
     }
 
-    override fun initObserver() {
-
-    }
+    override fun initObserver() {}
 
     // BottomNavigationView 숨기기
     private fun bottomNavigationRemove() {
         val bottomNavigationView =
             requireActivity().findViewById<BottomNavigationView>(R.id.main_bnv)
         bottomNavigationView?.visibility = View.GONE
+    }
+
+    // 뒤로 가기
+    private fun handleOnBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().popBackStack()
+        }
     }
 
     private fun setClickListener() {

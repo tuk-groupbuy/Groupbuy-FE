@@ -4,6 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -34,10 +35,19 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         initBottomSheets()
         initBottomSheetActions()
         setupPriceFormatting()
+        handleOnBackPressed()
     }
 
     override fun initObserver() {}
 
+    // 뒤로 가기
+    private fun handleOnBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().popBackStack()
+        }
+    }
+
+    // BottomNavigationView 숨기기
     private fun bottomNavigationRemove() {
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.main_bnv)
         bottomNavigationView?.visibility = View.GONE
@@ -97,7 +107,9 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
 
             dateBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
-
+        binding.viewCreatePostBottomSheetBg.setOnClickListener {
+            dateBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
 
     private fun setupPriceFormatting() {
