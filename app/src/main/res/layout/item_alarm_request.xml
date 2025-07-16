@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_alarmRequest_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/view_1"
+            android:layout_width="16dp"
+            android:layout_height="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_alarmRequest_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_rect_999_gray100_fill"
+            app:layout_constraintStart_toEndOf="@id/view_1"
+            app:layout_constraintTop_toBottomOf="@id/view_1"/>
+            
+        <TextView
+            android:id="@+id/tv_alarmRequest_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="사용자 이름"
+            style="@style/TextAppearance.TUgether.Body1"
+            android:maxLines="1"
+            android:singleLine="true"
+            app:layout_constraintStart_toEndOf="@id/iv_alarmRequest_image"
+            app:layout_constraintEnd_toStartOf="@id/tv_alarmRequest_denial"
+            app:layout_constraintTop_toTopOf="@id/iv_alarmRequest_image"
+            app:layout_constraintBottom_toBottomOf="@id/iv_alarmRequest_image"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_alarmRequest_denial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="거절"
+            style="@style/TextAppearance.TUgether.Head2"
+            android:textSize="14sp"
+            android:textColor="@color/gray_300"
+            android:background="@drawable/shape_rect_999_gray200_fill"
+            app:layout_constraintEnd_toStartOf="@id/tv_alarmRequest_approval"
+            app:layout_constraintTop_toTopOf="@id/iv_alarmRequest_image"
+            app:layout_constraintBottom_toBottomOf="@id/iv_alarmRequest_image"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_alarmRequest_approval"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="승인"
+            style="@style/TextAppearance.TUgether.Head2"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_rect_999_blue400_fill"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_alarmRequest_image"
+            app:layout_constraintBottom_toBottomOf="@id/iv_alarmRequest_image"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:layout_marginEnd="16dp"/>
+
+        <View
+            android:id="@+id/view_2"
+            android:layout_width="16dp"
+            android:layout_height="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_alarmRequest_image"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

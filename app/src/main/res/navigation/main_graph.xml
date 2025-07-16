@@ -3,13 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/homeTab">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.tuk.tugether.presentation.home.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+    <!-- home tab -->
+    <navigation android:id="@+id/homeTab"
+        app:startDestination="@+id/homeFragment">
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.tuk.tugether.presentation.home.HomeFragment"
+            android:label="HomeFragment"
+            tools:layout="@layout/fragment_home">
+            <action
+                android:id="@+id/goToAlarm"
+                app:destination="@id/alarmFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/alarmFragment"
+            android:name="com.tuk.tugether.presentation.home.AlarmFragment"
+            android:label="AlarmFragment"
+            tools:layout="@layout/fragment_alarm"/>
+
+    </navigation>
 
     <fragment
         android:id="@+id/chatFragment"

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    tools:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        style="@style/TextAppearance.TUgether.Body1"
+        android:textColor="@color/gray_200"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2011.11.11"
+        tools:visibility="visible" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_receiver_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_date">
+
+        <ImageView
+            android:id="@+id/iv_receiver_profile"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_sample_img" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_receiver_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        style="@style/TextAppearance.TUgether.Body1"
+        android:textColor="@color/blue_400"
+        android:layout_marginTop="-20dp"
+        app:layout_constraintTop_toTopOf="@id/cv_receiver_profile"
+        app:layout_constraintStart_toEndOf="@id/cv_receiver_profile"
+        tools:text="상대방" />
+
+    <TextView
+        android:id="@+id/tv_receiver_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/shape_rect_8_blue_100_fill"
+        android:breakStrategy="simple"
+        android:clipToOutline="true"
+        android:maxWidth="280dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/tv_receiver_nickname"
+        app:layout_constraintTop_toBottomOf="@id/tv_receiver_nickname"
+        tools:text="이 물건 구매하고 싶어요" />
+
+    <TextView
+        android:id="@+id/tv_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="22:00"
+        style="@style/TextAppearance.TUgether.Body1"
+        android:textColor="@color/gray_600"
+        app:layout_constraintBottom_toBottomOf="@id/tv_receiver_chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/tv_receiver_chat" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
