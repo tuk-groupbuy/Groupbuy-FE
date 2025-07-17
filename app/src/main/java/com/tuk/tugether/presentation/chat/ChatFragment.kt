@@ -1,5 +1,6 @@
 package com.tuk.tugether.presentation.chat
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.viewModels
@@ -28,19 +29,15 @@ class ChatFragment: BaseFragment<FragmentChatBinding>(R.layout.fragment_chat) {
     override fun initView() {
         initRecyclerView()
 
-//        val userId = 6L // 로그인 전 하드코딩된 ID
-//        val request = CreateChatRequestModel(userId)
-//        viewModel.fetchChatRoomList(request)
+        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userIdStr = prefs.getString("user_id", null)
 
-        val userId = 6L // 로그인 전 하드코딩된 ID
-        viewModel.fetchChatRoomList(userId)
+        userIdStr?.toLongOrNull()?.let { userId ->
+            viewModel.fetchChatRoomList(userId)
+        } ?: run {
+            Log.e("ChatFragment", "user_id is null or invalid")
+        }
 
-//        binding.tvGotochat.setOnClickListener {
-//            val intent = Intent(requireContext(), ChatRoomActivity::class.java)
-//            val chatRoomId = intent.putExtra("chatRoomId", 5L) // 임시로 5L 전달
-//            Log.d("chatFragment", "ChatFragment -> ChatRoom $chatRoomId")
-//            startActivity(intent)
-//        }
     }
 
     private fun initRecyclerView() {
@@ -61,7 +58,15 @@ class ChatFragment: BaseFragment<FragmentChatBinding>(R.layout.fragment_chat) {
     override fun onResume() {
         super.onResume()
         // 화면 다시 보일 때 리스트 최신화
-        viewModel.fetchChatRoomList(6L)
+        val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userIdStr = prefs.getString("user_id", null)
+        val nickname = prefs.getString("user_nickname", null)
+
+        Log.d("ChatFragment", "user_id: $userIdStr, nickname: $nickname")
+
+        userIdStr?.toLongOrNull()?.let { userId ->
+            viewModel.fetchChatRoomList(userId)
+        }
     }
 
     // BottomNavigationView 보이기
