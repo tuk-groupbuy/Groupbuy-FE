@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
-
     @Provides
     @Singleton
     fun providePostDataSource(postDataSourceImpl: PostDataSourceImpl): PostDataSource =
@@ -30,5 +29,6 @@ object DataSourceModule {
     @Singleton
     fun provideChatDataSource(chatDataSourceImpl: ChatDataSourceImpl): ChatDataSource =
         chatDataSourceImpl
+  
 
 }

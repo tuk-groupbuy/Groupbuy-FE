@@ -55,7 +55,7 @@ class PostFragment: BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
         lifecycleScope.launchWhenStarted {
             postViewModel.errorMessage.collect { msg ->
                 msg?.let {
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -94,7 +94,16 @@ class PostFragment: BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
 
         // 참여 상태
         when (post.participationStatus) {
-            "JOINED" -> {
+            "APPROVED" -> {
+                // 버튼 상태 비활성화
+                tvPostJoinBtn.text = "취소하기"
+                tvPostJoinBtn.setBackgroundResource(R.drawable.shape_rect_999_gray200_fill)
+                tvPostJoinBtn.setTextColor(requireContext().getColor(R.color.gray_300))
+                tvPostJoinBtn.isEnabled = false
+                tvPostJoinBtn.isClickable = false
+            }
+
+            "REQUESTED" -> {
                 // 버튼 상태 취소로 바꾸기
                 tvPostJoinBtn.text = "취소하기"
                 tvPostJoinBtn.setBackgroundResource(R.drawable.shape_rect_999_blue400_fill)

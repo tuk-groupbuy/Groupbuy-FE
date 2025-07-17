@@ -50,4 +50,5 @@ object RepositoryModule {
     fun providesChatRepository(
         chatRepositoryImpl: ChatRepositoryImpl
     ): ChatRepository = chatRepositoryImpl
+  
 }
