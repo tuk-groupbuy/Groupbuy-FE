@@ -102,4 +102,16 @@ dependencies {
 
     // circle image
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    // websocket
+    implementation(libs.krossbow.stomp.core)
+    implementation(libs.krossbow.websocket.okhttp)
+    implementation(libs.krossbow.stomp.moshi)
+
+    // moshi
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+
+    // paging3
+    implementation ("androidx.paging:paging-runtime-ktx:3.2.1")
 }

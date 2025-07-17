@@ -24,7 +24,7 @@
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_sample_img" />
+            tools:src="@drawable/ic_person" />
 
     </androidx.cardview.widget.CardView>
 
