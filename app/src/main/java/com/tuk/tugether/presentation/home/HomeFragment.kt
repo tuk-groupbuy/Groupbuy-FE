@@ -1,5 +1,6 @@
 package com.tuk.tugether.presentation.home
 
+import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
@@ -40,8 +41,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initRecyclerView() {
         postAdapter = PostAdapter(mutableListOf()) { post ->
-            findNavController().navigate(R.id.goToPost)
+            val bundle = Bundle().apply {
+                putLong("postId", post.postId)
+            }
+            findNavController().navigate(R.id.goToPost, bundle)
         }
+
 
         binding.rvHomePicture.apply {
             adapter = postAdapter
