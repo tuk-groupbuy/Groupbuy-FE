@@ -22,15 +22,52 @@ class HomeViewModel @Inject constructor(
     private val _postList = MutableLiveData<List<GetAllPostResponseModel>>()
     val postList: LiveData<List<GetAllPostResponseModel>> get() = _postList
 
+    private val _isSearchMode = MutableLiveData(false)
+    val isSearchMode: LiveData<Boolean> get() = _isSearchMode
+
+    fun setSearchMode(value: Boolean) {
+        _isSearchMode.value = value
+    }
+
+    var cachedSearchResults: List<GetAllPostResponseModel>? = null
+
     fun getAllPosts() {
         viewModelScope.launch {
             postRepository.getAllPosts()
                 .onSuccess { result ->
-                    Log.d("HomeViewModel", "게시물 목록 불러오기 성공: $result")
-                    _postList.value = result
+                    _postList.value = result.reversed()
+                    setSearchMode(false) // 전체 목록이므로 검색모드 해제
+                }
+                .onFailure {
+                    _postList.value = emptyList()
+                    setSearchMode(false)
+                }
+        }
+    }
+
+    fun searchPosts(keyword: String) {
+        viewModelScope.launch {
+            postRepository.searchPosts(keyword)
+                .onSuccess { results ->
+                    cachedSearchResults = results
+                    _postList.value = results
+                    setSearchMode(true)
+                }
+                .onFailure {
+                    _postList.value = emptyList()
+                    setSearchMode(false)
+                }
+        }
+    }
+
+    fun searchPost(keyword: String) {
+        viewModelScope.launch {
+            postRepository.searchPosts(keyword)
+                .onSuccess { result ->
+                    _postList.value = result.reversed()
                 }
                 .onFailure { exception ->
-                    Log.e("HomeViewModel", "게시물 목록 불러오기 실패", exception)
+                    Log.e("HomeViewModel", "검색 실패", exception)
                     _postList.value = emptyList()
                 }
         }

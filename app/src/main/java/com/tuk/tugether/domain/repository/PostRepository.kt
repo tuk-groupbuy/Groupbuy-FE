@@ -16,4 +16,5 @@ interface PostRepository {
     suspend fun deletePost(postId: Long): Result<String>
     suspend fun joinPost(request: JoinPostRequestModel): Result<String>
     suspend fun deleteJoinPost(request: DeleteJoinPostRequestModel): Result<String>
+    suspend fun searchPosts(keyword: String): Result<List<GetAllPostResponseModel>>
 }

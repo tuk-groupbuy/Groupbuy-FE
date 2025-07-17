@@ -36,6 +36,9 @@ class PostRepositoryImpl @Inject constructor(
 
     override suspend fun deleteJoinPost(request: DeleteJoinPostRequestModel): Result<String> =
         runCatching { postDataSource.deleteJoinPost(request.toDto()) }
+
+    override suspend fun searchPosts(keyword: String): Result<List<GetAllPostResponseModel>> =
+        runCatching { postDataSource.searchPosts(keyword).toModel() }
 }
 
 

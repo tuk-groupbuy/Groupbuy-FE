@@ -5,6 +5,7 @@ import com.tuk.tugether.data.dto.request.post.JoinPostRequestDto
 import com.tuk.tugether.data.dto.request.post.UpdatePostRequestDto
 import com.tuk.tugether.data.dto.response.post.GetAllPostResponseDto
 import com.tuk.tugether.data.dto.response.post.GetPostDetailResponseDto
+import com.tuk.tugether.data.dto.response.post.SearchPostResponseDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -55,4 +56,10 @@ interface PostService {
     suspend fun deleteJoinPost(
         @Body body: DeleteJoinPostRequestDto
     ): String
+
+    @GET("/post/search")
+    suspend fun searchPosts(
+        @Query("keyword") keyword: String
+    ): SearchPostResponseDto
+
 }

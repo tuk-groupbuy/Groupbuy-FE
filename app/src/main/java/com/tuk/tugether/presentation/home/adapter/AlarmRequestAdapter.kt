@@ -24,12 +24,12 @@ class AlarmRequestAdapter(
 
             binding.tvAlarmRequestApproval.setOnClickListener {
                 onApprove(request.postId, request.userId)
-                removeItem(adapterPosition) // ✅ 아이템 제거
+                removeItem(adapterPosition)
             }
 
             binding.tvAlarmRequestDenial.setOnClickListener {
                 onReject(request.postId, request.userId)
-                removeItem(adapterPosition) // ✅ 아이템 제거
+                removeItem(adapterPosition)
             }
         }
     }
@@ -37,7 +37,7 @@ class AlarmRequestAdapter(
     private fun removeItem(position: Int) {
         if (position != RecyclerView.NO_POSITION && position < requests.size) {
             requests.removeAt(position)
-            notifyItemRemoved(position) // ✅ 애니메이션 포함한 자연스러운 제거
+            notifyItemRemoved(position)
         }
     }
 

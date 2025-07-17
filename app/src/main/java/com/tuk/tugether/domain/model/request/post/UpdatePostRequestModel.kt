@@ -6,6 +6,7 @@ data class UpdatePostRequestModel(
     val title: String,
     val content: String,
     val goalQuantity: Int,
+    val minParticipants: Int,
     val price: Int,
     val imageUrl: String,
     val deadline: String
@@ -14,6 +15,7 @@ data class UpdatePostRequestModel(
         title = title,
         content = content,
         goalQuantity = goalQuantity,
+        minParticipants = minParticipants,
         price = price,
         imageUrl = imageUrl,
         deadline = deadline
