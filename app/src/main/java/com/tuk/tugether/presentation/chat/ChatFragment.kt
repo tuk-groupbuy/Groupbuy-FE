@@ -55,4 +55,9 @@ class ChatFragment: BaseFragment<FragmentChatBinding>(R.layout.fragment_chat) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        // 화면 다시 보일 때 리스트 최신화
+        viewModel.fetchChatRoomList(6L)
+    }
 }
