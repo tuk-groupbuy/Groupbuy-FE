@@ -6,20 +6,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tuk.tugether.domain.model.request.CommonChatRequestModel
-import com.tuk.tugether.domain.model.request.CreateChatRequestModel
 import com.tuk.tugether.domain.model.response.ChatListResponseModel
 import com.tuk.tugether.domain.model.response.ChatMessageResponseModel
 import com.tuk.tugether.domain.model.response.CommonChatResponseModel
 import com.tuk.tugether.domain.model.response.CreateChatResponseModel
 import com.tuk.tugether.domain.model.response.ParticipantListResponseModel
 import com.tuk.tugether.domain.repository.chat.ChatRepository
+import com.tuk.tugether.presentation.chat.adapter.WebSocketResource
 import com.tuk.tugether.util.network.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.Locale.filter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -52,6 +53,9 @@ class ChatViewModel @Inject constructor(
         MutableStateFlow<UiState<ChatEvent>>(UiState.Empty)
     val chatEvent: StateFlow<UiState<ChatEvent>> get() = _chatEvent
 
+    private val _webSocketEvent = MutableSharedFlow<WebSocketResource>()
+    val webSocketEvent: SharedFlow<WebSocketResource> get() = _webSocketEvent
+
     sealed class ChatEvent {
         data class CreateChatRoom(val result: CreateChatResponseModel) : ChatEvent()
         data class FetchChatLog(val chatLog: ChatMessageResponseModel) : ChatEvent()
@@ -59,6 +63,11 @@ class ChatViewModel @Inject constructor(
         data class RefreshChatLog(val chatLog: ChatMessageResponseModel) : ChatEvent()
     }
 
+    fun eventWebsocket(event: WebSocketResource) {
+        viewModelScope.launch {
+            _webSocketEvent.emit(event)
+        }
+    }
 
     fun fetchParticipantList(chatRoomId: Long) {
         viewModelScope.launch {
@@ -144,6 +153,37 @@ class ChatViewModel @Inject constructor(
                         Log.d("createViewingPartyChatRoom error", "$it.stackTraceToString()")
                     }
             }
+        }
+    }
+
+    fun refreshChatLog() {
+        viewModelScope.launch {
+            _chatEvent.value = UiState.Loading
+            chatRepository.fetchChatMessage(chatRoomId.value, 0, 1)
+                .onSuccess { response ->
+                    Log.d("fetchViewingPartyChatLog", "$response.toString()")
+                    temp.value = response.messages + temp.value
+
+                    val list = if (response.isLast) {
+                        temp.value.toMutableList().apply {
+                            if(this.isNotEmpty()) {
+                                this[lastIndex].isLastIndex = true
+                            }
+                        }
+                    } else {
+                        temp.value
+                    }
+
+                    _chatEvent.value =
+                        UiState.Success(
+                            ChatEvent.FetchChatLog(
+                                response.copy(messages = list)
+                            )
+                        )
+
+                }.onFailure {
+                    Log.d("createViewingPartyChatRoom error", "$it.stackTraceToString()")
+                }
         }
     }
 
