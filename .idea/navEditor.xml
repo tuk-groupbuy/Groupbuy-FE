@@ -20,6 +20,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="createPostFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="goToPost">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="homeTab">
                     <value>
                       <LayoutPositions>
@@ -55,6 +76,11 @@
                                   <option name="myPositions">
                                     <map>
                                       <entry key="goToAlarm">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                      <entry key="goToPost">
                                         <value>
                                           <LayoutPositions />
                                         </value>
