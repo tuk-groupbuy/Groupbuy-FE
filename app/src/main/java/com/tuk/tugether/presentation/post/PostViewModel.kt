@@ -1,5 +1,6 @@
 package com.tuk.tugether.presentation.post
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,6 +48,7 @@ class PostViewModel @Inject constructor(
             val message = result.getOrNull()
             val postId = extractPostIdFromMessage(message)
             _createPostResult.value = postId
+            Log.d("PostViewModel", "게시글 생성 성공: $postId")
         }
     }
 

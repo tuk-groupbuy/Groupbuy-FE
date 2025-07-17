@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tuk.tugether.R
 import com.tuk.tugether.databinding.FragmentAlarmBinding
+import com.tuk.tugether.domain.model.request.CommonChatRequestModel
 import com.tuk.tugether.domain.model.request.notification.NotificationApproveRequestModel
 import com.tuk.tugether.domain.model.request.notification.NotificationDecisionRequestModel
 import com.tuk.tugether.presentation.base.BaseFragment
+import com.tuk.tugether.presentation.chat.ChatViewModel
 import com.tuk.tugether.presentation.home.adapter.Alarm
 import com.tuk.tugether.presentation.home.adapter.AlarmAdapter
 import com.tuk.tugether.presentation.home.adapter.AlarmRequest
@@ -19,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AlarmFragment : BaseFragment<FragmentAlarmBinding>(R.layout.fragment_alarm) {
 
     private val viewModel: NotificationViewModel by viewModels()
+    private val chatViewModel: ChatViewModel by viewModels()
 
     override fun initView() {
         bottomNavigationRemove()
@@ -61,19 +64,26 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>(R.layout.fragment_alarm
                             senderNickname = item.senderNickname,
                             createdAt = item.createdAt,
                             postId = item.postId,
-                            userId = item.userId!!
+                            userId = item.userId!!,
+                            chatRoomId = item.chatRoomId
                         )
                     }
                 )
             }
 
             val adapter = AlarmAdapter(alarmList,
-                onApprove = { postId, userId ->
+                onApprove = { postId, userId, chatRoomId ->
                     viewModel.approveNotification(
                         NotificationApproveRequestModel(
                             postId = postId,
                             userId = userId,
                             writerId = writerId
+                        )
+                    )
+                    chatViewModel.fetchJoinChat(
+                        CommonChatRequestModel(
+                            chatRoomId = chatRoomId,
+                            userId = userId
                         )
                     )
                 },

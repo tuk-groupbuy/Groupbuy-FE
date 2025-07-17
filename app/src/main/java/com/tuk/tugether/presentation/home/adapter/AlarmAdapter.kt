@@ -8,7 +8,7 @@ import com.tuk.tugether.databinding.ItemAlarmBinding
 
 class AlarmAdapter(
     private val alarms: List<Alarm>,
-    private val onApprove: (postId: Long, userId: Long) -> Unit,
+    private val onApprove: (postId: Long, userId: Long, chatRoomId: Long) -> Unit,
     private val onReject: (postId: Long, userId: Long) -> Unit
 ) : RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder>() {
 
