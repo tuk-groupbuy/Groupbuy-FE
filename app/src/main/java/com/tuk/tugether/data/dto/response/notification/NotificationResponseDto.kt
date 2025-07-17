@@ -6,7 +6,7 @@ data class NotificationResponseDto(
     val content: String,
     val isRead: Boolean,
     val createdAt: String,
-    val userId: Long?,  // null 가능
+    val userId: Long?,
     val currentQuantity: Int,
     val goalQuantity: Int
 )

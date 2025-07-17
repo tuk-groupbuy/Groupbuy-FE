@@ -8,6 +8,4 @@ interface NotificationDataSource {
     suspend fun getNotifications(userId: Long): List<NotificationResponseDto>
     suspend fun approveNotification(request: NotificationApproveRequestDto): String
     suspend fun rejectNotification(request: NotificationDecisionRequestDto): String
-
-
 }
