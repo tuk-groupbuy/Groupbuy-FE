@@ -10,7 +10,8 @@ data class NotificationResponseDto(
     val createdAt: String,
     val userId: Long?,
     val currentQuantity: Int,
-    val goalQuantity: Int
+    val goalQuantity: Int,
+    val senderNickname: String
 )
 
 fun NotificationResponseDto.toModel(): NotificationResponseModel =
@@ -22,5 +23,6 @@ fun NotificationResponseDto.toModel(): NotificationResponseModel =
         createdAt = createdAt,
         userId = userId,
         currentQuantity = currentQuantity,
-        goalQuantity = goalQuantity
+        goalQuantity = goalQuantity,
+        senderNickname = senderNickname
     )
