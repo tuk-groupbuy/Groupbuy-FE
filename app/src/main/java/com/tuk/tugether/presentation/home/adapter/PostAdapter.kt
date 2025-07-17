@@ -8,7 +8,7 @@ import com.tuk.tugether.databinding.ItemPostBinding
 import com.tuk.tugether.domain.model.response.post.GetAllPostResponseModel
 
 class PostAdapter(
-    private val posts: List<GetAllPostResponseModel>,
+    private val posts: MutableList<GetAllPostResponseModel>,
     private val onItemClick: (GetAllPostResponseModel) -> Unit
 ) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
@@ -18,15 +18,13 @@ class PostAdapter(
         fun bind(post: GetAllPostResponseModel) {
             binding.tvPostTitle.text = post.title
             binding.tvPostDeadline.text = post.deadlineText
-            binding.tvPostPrice.text = "${post.price}원"
-            binding.tvPostPersonnel.text = "${post.currentQuantity} / ${post.goalQuantity}"
+            binding.tvPostPrice.text = "₩${post.price}"
+            binding.tvPostPersonnel.text = "${post.currentQuantity}/${post.goalQuantity}"
 
-            // 이미지 로딩
             Glide.with(binding.root.context)
-                .load("http://13.125.230.122:8080/${post.imageUrl.replace("\\", "/")}")
+                .load("http://13.125.230.122:8080/${post.imageUrl}")
                 .into(binding.ivPostImage)
 
-            // 클릭 리스너 연결
             binding.root.setOnClickListener {
                 onItemClick(post)
             }
@@ -43,4 +41,10 @@ class PostAdapter(
     }
 
     override fun getItemCount(): Int = posts.size
+
+    fun updateData(newPosts: List<GetAllPostResponseModel>) {
+        posts.clear()
+        posts.addAll(newPosts)
+        notifyDataSetChanged()
+    }
 }

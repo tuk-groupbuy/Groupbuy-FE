@@ -19,8 +19,8 @@ class HomeViewModel @Inject constructor(
     private val postRepository: PostRepository
 ) : ViewModel() {
 
-    private val _postList = MutableStateFlow<List<GetAllPostResponseModel>>(emptyList())
-    val postList: StateFlow<List<GetAllPostResponseModel>> = _postList
+    private val _postList = MutableLiveData<List<GetAllPostResponseModel>>()
+    val postList: LiveData<List<GetAllPostResponseModel>> get() = _postList
 
     fun getAllPosts() {
         viewModelScope.launch {
