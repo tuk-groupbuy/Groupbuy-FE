@@ -13,7 +13,7 @@ class AlarmRequestAdapter(
     inner class RequestViewHolder(private val binding: ItemAlarmRequestBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(request: AlarmRequest) {
-            binding.tvAlarmRequestTitle.text = "요청 ID: ${request.notificationId}"
+            binding.tvAlarmRequestTitle.text = "${request.senderNickname}"
 
             // 예시 이미지
             Glide.with(binding.root.context)

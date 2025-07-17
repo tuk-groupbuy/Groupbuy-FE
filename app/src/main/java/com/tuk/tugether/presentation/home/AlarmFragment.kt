@@ -1,5 +1,6 @@
 package com.tuk.tugether.presentation.home
 
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,12 +13,14 @@ import com.tuk.tugether.presentation.home.adapter.Alarm
 import com.tuk.tugether.presentation.home.adapter.AlarmAdapter
 import com.tuk.tugether.presentation.home.adapter.AlarmRequest
 import com.tuk.tugether.presentation.home.adapter.AlarmRequestAdapter
+import com.tuk.tugether.presentation.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AlarmFragment : BaseFragment<FragmentAlarmBinding>(R.layout.fragment_alarm) {
 
     private val viewModel: NotificationViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun initView() {
         bottomNavigationRemove()
@@ -53,7 +56,7 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>(R.layout.fragment_alarm
                     max = first.goalQuantity,
                     requests = group.map {
                         AlarmRequest(
-                            notificationId = it.notificationId,
+                            senderNickname = it.senderNickname,
                             createdAt = it.createdAt
                         )
                     }
@@ -65,7 +68,15 @@ class AlarmFragment : BaseFragment<FragmentAlarmBinding>(R.layout.fragment_alarm
             binding.rvAlarm.layoutManager = LinearLayoutManager(requireContext())
         }
 
-        viewModel.getNotifications(5L)  // userId 임시 고정
+        val userId = getUserIdFromPrefs()
+        if (userId.isNotEmpty()) {
+            viewModel.getNotifications(userId.toLong())
+        }
+        viewModel.getNotifications(userId.toLong())
     }
 
+    private fun getUserIdFromPrefs(): String {
+        val prefs = requireActivity().getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
+        return prefs.getString("user_id", "") ?: ""
+    }
 }
