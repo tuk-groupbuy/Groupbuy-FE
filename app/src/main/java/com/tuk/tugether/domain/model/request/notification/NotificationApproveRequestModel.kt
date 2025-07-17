@@ -7,6 +7,6 @@ data class NotificationApproveRequestModel(
     val userId: Long,
     val writerId: Long
 ){
-    fun toNotificationApproveRequestDto() =
+    fun toDto(): NotificationApproveRequestDto =
         NotificationApproveRequestDto(postId, userId, writerId)
 }

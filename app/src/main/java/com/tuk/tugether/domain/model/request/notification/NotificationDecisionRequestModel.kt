@@ -7,6 +7,6 @@ data class NotificationDecisionRequestModel(
     val userId: Long,
     val writerId: Long
 ){
-    fun toNotificationDecisionRequestDto() =
+    fun toDto(): NotificationDecisionRequestDto =
         NotificationDecisionRequestDto(postId, userId, writerId)
 }

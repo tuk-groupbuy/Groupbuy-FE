@@ -12,15 +12,3 @@ data class NotificationResponseModel (
     val currentQuantity: Int,
     val goalQuantity: Int
 )
-
-fun NotificationResponseDto.toNotificationResponseModel(): NotificationResponseModel =
-    NotificationResponseModel(
-        notificationId = notificationId,
-        type = type,
-        content = content,
-        isRead = isRead,
-        createdAt = createdAt,
-        userId = userId,
-        currentQuantity = currentQuantity,
-        goalQuantity = goalQuantity
-    )

@@ -1,5 +1,7 @@
 package com.tuk.tugether.data.dto.response.notification
 
+import com.tuk.tugether.domain.model.response.notification.NotificationResponseModel
+
 data class NotificationResponseDto(
     val notificationId: Long,
     val type: String,
@@ -10,3 +12,15 @@ data class NotificationResponseDto(
     val currentQuantity: Int,
     val goalQuantity: Int
 )
+
+fun NotificationResponseDto.toModel(): NotificationResponseModel =
+    NotificationResponseModel(
+        notificationId = notificationId,
+        type = type,
+        content = content,
+        isRead = isRead,
+        createdAt = createdAt,
+        userId = userId,
+        currentQuantity = currentQuantity,
+        goalQuantity = goalQuantity
+    )

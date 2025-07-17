@@ -1,25 +1,23 @@
 package com.tuk.tugether.data.repositoryImpl
 
 import com.tuk.tugether.data.datasource.NotificationDataSource
-import com.tuk.tugether.data.dto.request.notification.NotificationApproveRequestDto
-import com.tuk.tugether.data.dto.request.notification.NotificationDecisionRequestDto
+import com.tuk.tugether.data.dto.response.notification.toModel
+import com.tuk.tugether.domain.model.request.notification.NotificationApproveRequestModel
+import com.tuk.tugether.domain.model.request.notification.NotificationDecisionRequestModel
 import com.tuk.tugether.domain.model.response.notification.NotificationResponseModel
-import com.tuk.tugether.domain.model.response.notification.toNotificationResponseModel
 import com.tuk.tugether.domain.repository.NotificationRepository
 import javax.inject.Inject
 
 class NotificationRepositoryImpl @Inject constructor(
     private val dataSource: NotificationDataSource
 ) : NotificationRepository {
-    override suspend fun getNotifications(userId: Long): List<NotificationResponseModel> {
-        return dataSource.getNotifications(userId).map { it.toNotificationResponseModel() }
-    }
 
-    override suspend fun approveNotification(request: NotificationApproveRequestDto): String {
-        return dataSource.approveNotification(request)
-    }
+    override suspend fun getNotifications(userId: Long): Result<List<NotificationResponseModel>> =
+        runCatching { dataSource.getNotifications(userId).map { it.toModel() } }
 
-    override suspend fun rejectNotification(request: NotificationDecisionRequestDto): String {
-        return dataSource.rejectNotification(request)
-    }
+    override suspend fun approveNotification(request: NotificationApproveRequestModel): Result<String> =
+        runCatching { dataSource.approveNotification(request.toDto()) }
+
+    override suspend fun rejectNotification(request: NotificationDecisionRequestModel): Result<String> =
+        runCatching { dataSource.rejectNotification(request.toDto()) }
 }
