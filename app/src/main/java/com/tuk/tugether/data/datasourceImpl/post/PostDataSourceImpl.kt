@@ -13,32 +13,27 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class PostDataSourceImpl @Inject constructor(
-    private val postService: PostService
+private val postService: PostService
 ) : PostDataSource {
-    override suspend fun createPost(
-        dto: RequestBody,
-        file: MultipartBody.Part
-    ): BaseResponse<String> =
+    override suspend fun createPost(dto: RequestBody, file: MultipartBody.Part): String =
         postService.createPost(dto, file)
 
-    override suspend fun getAllPosts(): BaseResponse<List<GetAllPostResponseDto>> =
+    override suspend fun getAllPosts(): List<GetAllPostResponseDto> =
         postService.getAllPosts()
 
-
-    override suspend fun getPostDetail(postId: Long, requesterId: Long): BaseResponse<GetPostDetailResponseDto> =
+    override suspend fun getPostDetail(postId: Long, requesterId: Long): GetPostDetailResponseDto =
         postService.getPostDetail(postId, requesterId)
 
-    override suspend fun updatePost(postId: Long, body: UpdatePostRequestDto): BaseResponse<String> =
+    override suspend fun updatePost(postId: Long, body: UpdatePostRequestDto): String =
         postService.updatePost(postId, body)
 
-
-    override suspend fun deletePost(postId: Long): BaseResponse<String> =
+    override suspend fun deletePost(postId: Long): String =
         postService.deletePost(postId)
 
-    override suspend fun joinPost(body: JoinPostRequestDto): BaseResponse<String> =
+    override suspend fun joinPost(body: JoinPostRequestDto): String =
         postService.joinPost(body)
 
-    override suspend fun deleteJoinPost(body: DeleteJoinPostRequestDto): BaseResponse<String> =
+    override suspend fun deleteJoinPost(body: DeleteJoinPostRequestDto): String =
         postService.deleteJoinPost(body)
-
 }
+

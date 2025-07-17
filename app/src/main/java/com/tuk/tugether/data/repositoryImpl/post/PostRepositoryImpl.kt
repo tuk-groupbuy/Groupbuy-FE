@@ -16,36 +16,26 @@ class PostRepositoryImpl @Inject constructor(
     private val postDataSource: PostDataSource
 ) : PostRepository {
 
-    override suspend fun createPost(
-        dto: RequestBody,
-        file: MultipartBody.Part
-    ): Result<String> = runCatching {
-        postDataSource.createPost(dto, file).data
-    }
+    override suspend fun createPost(dto: RequestBody, file: MultipartBody.Part): Result<String> =
+        runCatching { postDataSource.createPost(dto, file) }
 
-    override suspend fun getAllPosts(): Result<List<GetAllPostResponseModel>> = runCatching {
-        postDataSource.getAllPosts().data.map { it.toModel() }
-    }
+    override suspend fun getAllPosts(): Result<List<GetAllPostResponseModel>> =
+        runCatching { postDataSource.getAllPosts().map { it.toModel() } }
 
     override suspend fun getPostDetail(postId: Long, requesterId: Long): Result<GetPostDetailResponseModel> =
-        runCatching {
-            postDataSource.getPostDetail(postId, requesterId).data.toModel()
-        }
+        runCatching { postDataSource.getPostDetail(postId, requesterId).toModel() }
 
     override suspend fun updatePost(postId: Long, body: UpdatePostRequestModel): Result<String> =
-        runCatching {
-            postDataSource.updatePost(postId, body.toDto()).data
-        }
+        runCatching { postDataSource.updatePost(postId, body.toDto()) }
 
-    override suspend fun deletePost(postId: Long): Result<String> = runCatching {
-        postDataSource.deletePost(postId).data
-    }
+    override suspend fun deletePost(postId: Long): Result<String> =
+        runCatching { postDataSource.deletePost(postId) }
 
     override suspend fun joinPost(request: JoinPostRequestModel): Result<String> =
-        runCatching { postDataSource.joinPost(request.toDto()).data }
+        runCatching { postDataSource.joinPost(request.toDto()) }
 
     override suspend fun deleteJoinPost(request: DeleteJoinPostRequestModel): Result<String> =
-        runCatching { postDataSource.deleteJoinPost(request.toDto()).data }
-
+        runCatching { postDataSource.deleteJoinPost(request.toDto()) }
 }
+
 
