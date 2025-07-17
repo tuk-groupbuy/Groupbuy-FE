@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -61,6 +62,7 @@ object NetworkModule {
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(TUgetherApplication.getString(R.string.base_url))
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(gsonConverterFactory)
             .client(client)
             .build()

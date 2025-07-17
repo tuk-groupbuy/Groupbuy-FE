@@ -114,4 +114,6 @@ dependencies {
 
     // paging3
     implementation ("androidx.paging:paging-runtime-ktx:3.2.1")
+
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
 }

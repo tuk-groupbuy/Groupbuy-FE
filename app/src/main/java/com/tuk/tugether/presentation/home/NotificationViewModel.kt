@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.tuk.tugether.domain.model.request.notification.NotificationApproveRequestModel
 import com.tuk.tugether.domain.model.request.notification.NotificationDecisionRequestModel
 import com.tuk.tugether.domain.model.response.notification.NotificationResponseModel
-import com.tuk.tugether.domain.model.response.post.GetAllPostResponseModel
 import com.tuk.tugether.domain.repository.NotificationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -39,12 +38,13 @@ class NotificationViewModel @Inject constructor(
         }
     }
 
+
     fun approveNotification(request: NotificationApproveRequestModel) {
         viewModelScope.launch {
             notificationRepository.approveNotification(request)
-                .onSuccess {
-                    Log.d("NotificationViewModel", "승인 성공: $it")
-                    _actionResult.value = it
+                .onSuccess { result ->
+                    Log.d("NotificationViewModel", "승인 성공: $result")
+                    _actionResult.value = result
                 }
                 .onFailure { exception ->
                     Log.e("NotificationViewModel", "승인 실패", exception)
@@ -56,9 +56,9 @@ class NotificationViewModel @Inject constructor(
     fun rejectNotification(request: NotificationDecisionRequestModel) {
         viewModelScope.launch {
             notificationRepository.rejectNotification(request)
-                .onSuccess {
-                    Log.d("NotificationViewModel", "거절 성공: $it")
-                    _actionResult.value = it
+                .onSuccess { result ->
+                    Log.d("NotificationViewModel", "거절 성공: $result")
+                    _actionResult.value = result
                 }
                 .onFailure { exception ->
                     Log.e("NotificationViewModel", "거절 실패", exception)

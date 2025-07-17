@@ -16,8 +16,15 @@ class NotificationRepositoryImpl @Inject constructor(
         runCatching { dataSource.getNotifications(userId).map { it.toModel() } }
 
     override suspend fun approveNotification(request: NotificationApproveRequestModel): Result<String> =
-        runCatching { dataSource.approveNotification(request.toDto()) }
+        runCatching {
+            val response = dataSource.approveNotification(request.toDto())
+            response.body() ?: "응답 없음"
+        }
 
     override suspend fun rejectNotification(request: NotificationDecisionRequestModel): Result<String> =
-        runCatching { dataSource.rejectNotification(request.toDto()) }
+        runCatching {
+            val response = dataSource.rejectNotification(request.toDto())
+            response.body() ?: "응답 없음"
+        }
+
 }

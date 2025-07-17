@@ -7,18 +7,28 @@ import com.bumptech.glide.Glide
 import com.tuk.tugether.databinding.ItemAlarmRequestBinding
 
 class AlarmRequestAdapter(
-    private val requests: List<AlarmRequest>
+    private val requests: List<AlarmRequest>,
+    private val onApprove: (postId: Long, userId: Long) -> Unit,
+    private val onReject: (postId: Long, userId: Long) -> Unit
 ) : RecyclerView.Adapter<AlarmRequestAdapter.RequestViewHolder>() {
 
     inner class RequestViewHolder(private val binding: ItemAlarmRequestBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(request: AlarmRequest) {
-            binding.tvAlarmRequestTitle.text = "${request.senderNickname}"
 
-            // 예시 이미지
+        fun bind(request: AlarmRequest) {
+            binding.tvAlarmRequestTitle.text = request.senderNickname
+
             Glide.with(binding.root.context)
                 .load("https://via.placeholder.com/100/888888/FFFFFF?text=User")
                 .into(binding.ivAlarmRequestImage)
+
+            binding.tvAlarmRequestApproval.setOnClickListener {
+                onApprove(request.postId, request.userId)
+            }
+
+            binding.tvAlarmRequestDenial.setOnClickListener {
+                onReject(request.postId, request.userId)
+            }
         }
     }
 
