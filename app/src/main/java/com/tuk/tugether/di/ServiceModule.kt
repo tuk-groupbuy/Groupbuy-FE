@@ -1,5 +1,6 @@
 package com.tuk.tugether.di
 
+import com.tuk.tugether.data.service.PostService
 import com.tuk.tugether.data.service.ChatService
 import com.tuk.tugether.data.service.TestService
 import dagger.Module
@@ -22,6 +23,12 @@ object ServiceModule {
         return retrofit.buildService()
     }
 
+    @Provides
+    @Singleton
+    fun providePostService(retrofit: Retrofit): PostService {
+        return retrofit.buildService()
+    }
+     
     @Provides
     @Singleton
     fun provideChatService(retrofit: Retrofit): ChatService {
