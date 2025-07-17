@@ -1,5 +1,7 @@
 package com.tuk.tugether.di
 
+import com.tuk.tugether.data.datasource.NotificationDataSource
+import com.tuk.tugether.data.datasourceImpl.NotificationDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,4 +18,9 @@ object DataSourceModule {
     fun providePostDataSource(postDataSourceImpl: PostDataSourceImpl): PostDataSource =
         postDataSourceImpl
 */
+
+    @Provides
+    @Singleton
+    fun provideNotificationDataSource(notificationDataSourceImpl: NotificationDataSourceImpl): NotificationDataSource =
+        notificationDataSourceImpl
 }

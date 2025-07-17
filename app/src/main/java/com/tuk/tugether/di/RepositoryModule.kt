@@ -1,7 +1,10 @@
 package com.tuk.tugether.di
 
+import com.tuk.tugether.data.repositoryImpl.NotificationRepositoryImpl
 import com.tuk.tugether.data.repositoryImpl.TestRepositoryImpl
+import com.tuk.tugether.data.service.NotificationService
 import com.tuk.tugether.data.service.TestService
+import com.tuk.tugether.domain.repository.NotificationRepository
 import com.tuk.tugether.domain.repository.TestRepository
 import dagger.Module
 import dagger.Provides
@@ -21,4 +24,11 @@ object RepositoryModule {
     fun providesTestRepository(
         testService: TestService
     ): TestRepository = TestRepositoryImpl(testService)
+
+
+    @ViewModelScoped
+    @Provides
+    fun providesNotificationRepository(
+        notificationRepositoryImpl: NotificationRepositoryImpl
+    ): NotificationRepository = notificationRepositoryImpl
 }
