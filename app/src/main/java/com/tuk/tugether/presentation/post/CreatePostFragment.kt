@@ -1,5 +1,6 @@
 package com.tuk.tugether.presentation.post
 
+import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -20,9 +21,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tuk.tugether.R
 import com.tuk.tugether.databinding.FragmentCreatePostBinding
+import com.tuk.tugether.domain.model.request.CreateChatRequestModel
 import com.tuk.tugether.domain.model.request.post.CreatePostRequestModel
 import com.tuk.tugether.domain.model.request.post.UpdatePostRequestModel
 import com.tuk.tugether.presentation.base.BaseFragment
+import com.tuk.tugether.presentation.chat.ChatViewModel
 import com.tuk.tugether.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -38,6 +41,7 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
 
     private lateinit var dateBottomSheetBehavior: BottomSheetBehavior<View>
     private val postViewModel: PostViewModel by viewModels()
+    private val chatViewModel: ChatViewModel by viewModels()
     private var imageUri: Uri? = null
     private var isEditMode: Boolean = false
     private var postIdForEdit: Long? = null
@@ -74,19 +78,60 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
     }
 
     override fun initObserver() {
+//        postViewModel.createPostResult.observe(viewLifecycleOwner) { postId ->
+//            if (postId != null && postId > 0) {
+//                val bundle = Bundle().apply {
+//                    putLong("postId", postId)
+//                }
+//                val navOptions = NavOptions.Builder()
+//                    .setPopUpTo(R.id.createPostFragment, true)
+//                    .build()
+//                findNavController().navigate(R.id.goToPost, bundle, navOptions)
+//                // postId를 활용해서 채팅방 생성 요청 보내기
+//                val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+//                val userId = prefs.getString("user_id", null)?.toLongOrNull()
+//
+//                if (userId != null) {
+//                    val createChatRequest = CreateChatRequestModel(userId, postId)
+//                    chatViewModel.fetchCreateChatRoom(createChatRequest)
+//                } else {
+//                    Toast.makeText(requireContext(), "유저 정보를 불러올 수 없습니다", Toast.LENGTH_SHORT).show()
+//                }
+//            } else {
+//                Toast.makeText(requireContext(), "작성 실패", Toast.LENGTH_SHORT).show()
+//            }
+//        }
         postViewModel.createPostResult.observe(viewLifecycleOwner) { postId ->
             if (postId != null && postId > 0) {
-                val bundle = Bundle().apply {
-                    putLong("postId", postId)
+                val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                val userId = prefs.getString("user_id", null)?.toLongOrNull()
+
+                if (userId != null) {
+                    val createChatRequest = CreateChatRequestModel(userId, postId)
+                    chatViewModel.fetchCreateChatRoom(createChatRequest)
+
+                    // 응답 옵저빙
+                    chatViewModel.createResult.observe(viewLifecycleOwner) { result ->
+                        if (result?.success == true) {
+                            val bundle = Bundle().apply {
+                                putLong("postId", postId)
+                            }
+                            val navOptions = NavOptions.Builder()
+                                .setPopUpTo(R.id.createPostFragment, true)
+                                .build()
+                            findNavController().navigate(R.id.goToPost, bundle, navOptions)
+                        } else {
+                            Toast.makeText(requireContext(), "채팅방 생성 실패", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "유저 정보를 불러올 수 없습니다", Toast.LENGTH_SHORT).show()
                 }
-                val navOptions = NavOptions.Builder()
-                    .setPopUpTo(R.id.createPostFragment, true)
-                    .build()
-                findNavController().navigate(R.id.goToPost, bundle, navOptions)
             } else {
                 Toast.makeText(requireContext(), "작성 실패", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         lifecycleScope.launchWhenStarted {
             postViewModel.postDetail.collect { post ->

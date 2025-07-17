@@ -8,7 +8,7 @@ import com.tuk.tugether.databinding.ItemAlarmRequestBinding
 
 class AlarmRequestAdapter(
     private val requests: MutableList<AlarmRequest>,
-    private val onApprove: (postId: Long, userId: Long) -> Unit,
+    private val onApprove: (postId: Long, userId: Long, chatRoomId: Long) -> Unit,
     private val onReject: (postId: Long, userId: Long) -> Unit
 ) : RecyclerView.Adapter<AlarmRequestAdapter.RequestViewHolder>() {
 
@@ -23,7 +23,7 @@ class AlarmRequestAdapter(
                 .into(binding.ivAlarmRequestImage)
 
             binding.tvAlarmRequestApproval.setOnClickListener {
-                onApprove(request.postId, request.userId)
+                onApprove(request.postId, request.userId, request.chatRoomId)
                 removeItem(adapterPosition)
             }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tuk.tugether.domain.model.request.CommonChatRequestModel
+import com.tuk.tugether.domain.model.request.CreateChatRequestModel
 import com.tuk.tugether.domain.model.response.ChatListResponseModel
 import com.tuk.tugether.domain.model.response.ChatMessageResponseModel
 import com.tuk.tugether.domain.model.response.CommonChatResponseModel
@@ -29,6 +30,9 @@ class ChatViewModel @Inject constructor(
 ): ViewModel() {
     private val _participantList = MutableLiveData<List<ParticipantListResponseModel.ChatRoomUserModel>>()
     val participantList: LiveData<List<ParticipantListResponseModel.ChatRoomUserModel>> = _participantList
+
+    private val _createResult = MutableLiveData<CreateChatResponseModel>()
+    val createResult: LiveData<CreateChatResponseModel> = _createResult
 
     private val _joinResult = MutableLiveData<CommonChatResponseModel>()
     val joinResult: LiveData<CommonChatResponseModel> = _joinResult
@@ -78,6 +82,19 @@ class ChatViewModel @Inject constructor(
                 }
                 .onFailure {
                     Log.e("ChatViewModel", "채팅 참여자 목록 실패: ${it.message}")
+                }
+        }
+    }
+
+    fun fetchCreateChatRoom(request: CreateChatRequestModel) {
+        viewModelScope.launch {
+            chatRepository.fetchCreateChatRoom(request)
+                .onSuccess { response ->
+                    Log.d("ChatViewModel", "채팅 생성 성공: $response")
+                    _createResult.value = response
+                }
+                .onFailure {
+                    Log.e("ChatViewModel", "채팅 생성 실패: ${it.message}")
                 }
         }
     }
