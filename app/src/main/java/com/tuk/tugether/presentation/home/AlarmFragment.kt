@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class AlarmFragment : BaseFragment<FragmentAlarmBinding>(R.layout.fragment_alarm) {
 
     private val viewModel: NotificationViewModel by viewModels()
-    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun initView() {
         bottomNavigationRemove()

@@ -1,6 +1,7 @@
 package com.tuk.tugether.domain.model.response.notification
 
 data class NotificationResponseModel (
+    val postId: Long,
     val notificationId: Long,
     val type: String,
     val content: String,
