@@ -22,7 +22,7 @@ class ChatPagingSource @Inject constructor(
         val page = params.key ?: 0
         if(page != 0) delay(500)
         runCatching {
-            chatService.fetchChatMessage(chatRoomId, page, 10).toChatMessageResponseModel(spf.getString("nick_name", "김태건")?:"김태건")
+            chatService.fetchChatMessage(chatRoomId, page, 10).toChatMessageResponseModel(spf.getString("user_nickname", "")?:"")
         }.fold(
             onSuccess = { response ->
                 return LoadResult.Page(

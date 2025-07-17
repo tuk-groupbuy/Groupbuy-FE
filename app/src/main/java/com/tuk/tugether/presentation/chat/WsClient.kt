@@ -33,7 +33,7 @@ class WsClient @Inject constructor(
 //    private var nickname = spf.getString("nickName", "김태건") ?: "김태건"
 //    private val roomId = viewModel.chatRoomId.value
     private var session: StompSession? = null
-    private var nickname = spf.getString("nickName", "김태건") ?: "김태건"
+    private val nickname: String get() = spf.getString("user_nickname", "") ?: ""
     private var roomId: Long = -1L // 기본값
 
     private var subscriptionJob: Job? = null

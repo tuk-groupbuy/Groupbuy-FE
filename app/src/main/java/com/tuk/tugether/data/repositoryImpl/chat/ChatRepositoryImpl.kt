@@ -42,7 +42,7 @@ class ChatRepositoryImpl @Inject constructor(
 
 
     override suspend fun fetchChatMessage(chatRoomId: Long, page: Int, size: Int): Result<ChatMessageResponseModel> = runCatching {
-        chatDataSource.fetchChatMessage(chatRoomId, page, size).toChatMessageResponseModel(spf.getString("nick_name", "김태건")?:"김태건")
+        chatDataSource.fetchChatMessage(chatRoomId, page, size).toChatMessageResponseModel(spf.getString("user_nickname", "")?:"")
     }
 
 }
