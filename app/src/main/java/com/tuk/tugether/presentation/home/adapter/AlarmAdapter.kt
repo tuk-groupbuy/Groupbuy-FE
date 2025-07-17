@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.tuk.tugether.databinding.ItemAlarmBinding
 
 class AlarmAdapter(
-    private val alarms: List<Alarm>
+    private val alarms: List<Alarm>,
+    private val onApprove: (postId: Long, userId: Long) -> Unit,
+    private val onReject: (postId: Long, userId: Long) -> Unit
 ) : RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder>() {
 
     inner class AlarmViewHolder(private val binding: ItemAlarmBinding) :
@@ -19,12 +20,12 @@ class AlarmAdapter(
             binding.tvAlarmPresent.text = "현재"
             binding.tvAlarmPersonnel.text = "${alarm.current}/${alarm.max}"
 
-            Glide.with(binding.root.context)
-                .load(alarm.imageUrl)
-                .into(binding.ivAlarmImage)
+            val requestAdapter = AlarmRequestAdapter(
+                alarm.requests.toMutableList(), // ✅ 여기 중요: MutableList로 변환
+                onApprove,
+                onReject
+            )
 
-            // 🔹 AlarmRequestAdapter 연결
-            val requestAdapter = AlarmRequestAdapter(alarm.requests)
             binding.rvAlarm.adapter = requestAdapter
             binding.rvAlarm.layoutManager = LinearLayoutManager(
                 binding.root.context,
