@@ -30,8 +30,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     override fun initObserver() {
-        observePostList()
-        viewModel.getAllPosts()
+        viewModel.postList.observe(viewLifecycleOwner) { posts ->
+            postAdapter.updateData(posts)
+        }
+
+        viewModel.isSearchMode.observe(viewLifecycleOwner) { isSearch ->
+            binding.tvHomeRecentPost.text = if (isSearch) "검색 결과" else "최근 게시글"
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.isSearchMode.value == true) {
+            viewModel.cachedSearchResults?.let {
+                postAdapter.updateData(it)
+            }
+        } else {
+            viewModel.getAllPosts()
+        }
     }
 
     private fun bottomNavigationShow() {
@@ -48,19 +64,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             findNavController().navigate(R.id.goToPost, bundle)
         }
 
-
         binding.rvHomePicture.apply {
             adapter = postAdapter
             layoutManager = LinearLayoutManager(requireContext())
-        }
-    }
-
-    private fun observePostList() {
-        viewModel.postList.observe(viewLifecycleOwner) { posts ->
-            if (posts.isEmpty()) {
-                Toast.makeText(requireContext(), "검색 실패", Toast.LENGTH_SHORT).show()
-            }
-            postAdapter.updateData(posts)
         }
     }
 
@@ -70,10 +76,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             binding.ivHomeDelete.visibility = if (inputText.isEmpty()) View.INVISIBLE else View.VISIBLE
         }
 
-        binding.etHomeSearch.setOnEditorActionListener { v, actionId, event ->
+        binding.etHomeSearch.setOnEditorActionListener { _, _, _ ->
             val keyword = binding.etHomeSearch.text.toString()
             if (keyword.isNotBlank()) {
-                viewModel.searchPost(keyword)
+                viewModel.searchPosts(keyword)
                 hideKeyboard()
             }
             true
@@ -83,26 +89,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun setClickListener() {
         binding.ivHomeDelete.setOnClickListener {
             binding.etHomeSearch.text.clear()
+            viewModel.setSearchMode(false)
+            viewModel.getAllPosts()
         }
 
         binding.ivHomeTopbarAlarm.setOnSingleClickListener {
             findNavController().navigate(R.id.goToAlarm)
-        }
-
-        binding.etHomeSearch.setOnClickListener {
-            binding.layoutSearchTopbar.visibility = View.VISIBLE
-            binding.clSearch.visibility = View.VISIBLE
-            binding.clHome.visibility = View.INVISIBLE
-            binding.layoutHomeTopbar.visibility = View.INVISIBLE
-        }
-
-        binding.ivSearchTopbarBack.setOnClickListener {
-            binding.layoutSearchTopbar.visibility = View.INVISIBLE
-            binding.clSearch.visibility = View.INVISIBLE
-            binding.clHome.visibility = View.VISIBLE
-            binding.layoutHomeTopbar.visibility = View.VISIBLE
-            binding.etHomeSearch.text.clear()
-            hideKeyboard()
         }
     }
 
@@ -111,5 +103,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         imm.hideSoftInputFromWindow(binding.etHomeSearch.windowToken, 0)
         binding.etHomeSearch.clearFocus()
     }
-
 }
