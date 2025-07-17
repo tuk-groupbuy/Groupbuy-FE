@@ -19,11 +19,7 @@ class AlarmAdapter(
             binding.tvAlarmPresent.text = "현재"
             binding.tvAlarmPersonnel.text = "${alarm.current}/${alarm.max}"
 
-            Glide.with(binding.root.context)
-                .load(alarm.imageUrl)
-                .into(binding.ivAlarmImage)
-
-            // 🔹 AlarmRequestAdapter 연결
+            // 요청자 리스트 어댑터 연결
             val requestAdapter = AlarmRequestAdapter(alarm.requests)
             binding.rvAlarm.adapter = requestAdapter
             binding.rvAlarm.layoutManager = LinearLayoutManager(
