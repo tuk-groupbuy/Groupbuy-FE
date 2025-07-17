@@ -65,6 +65,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 finish()
             }
         }
+
+        loginViewModel.userInfo.observe(this) { userInfo ->
+            if (userInfo != null) {
+                // id, nickname 데이터 안전하게 받음
+                val userId = userInfo.userId
+                val nickname = userInfo.nickname
+
+                // SharedPreferences에 저장 예시
+                val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                prefs.edit()
+                    .putString("user_id", userId)
+                    .putString("user_nickname", nickname)
+                    .apply()
+
+                // 이후 화면 전환 등 처리
+                Toast.makeText(this, "로그인 완료: $nickname", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     private fun setSignUpText() {
