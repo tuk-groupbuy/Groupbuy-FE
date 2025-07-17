@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tuk.tugether.domain.model.request.post.DeleteJoinPostRequestModel
 import com.tuk.tugether.domain.model.request.post.JoinPostRequestModel
+import com.tuk.tugether.domain.model.request.post.UpdatePostRequestModel
 import com.tuk.tugether.domain.model.response.post.GetPostDetailResponseModel
 import com.tuk.tugether.domain.repository.PostRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +33,9 @@ class PostViewModel @Inject constructor(
 
     private val _createPostResult = MutableLiveData<Long?>()
     val createPostResult: LiveData<Long?> = _createPostResult
+
+    private val _updatePostResult = MutableLiveData<Boolean>()
+    val updatePostResult: LiveData<Boolean> = _updatePostResult
 
     private val _deletePostResult = MutableLiveData<Boolean>()
     val deletePostResult: LiveData<Boolean> = _deletePostResult
@@ -108,4 +112,15 @@ class PostViewModel @Inject constructor(
             )
         }
     }
+
+    fun updatePost(postId: Long, model: UpdatePostRequestModel) {
+        viewModelScope.launch {
+            val result = postRepository.updatePost(postId, model)
+            _updatePostResult.value = result.isSuccess
+            if (result.isFailure) {
+                _errorMessage.value = result.exceptionOrNull()?.message ?: "게시글 수정 실패"
+            }
+        }
+    }
+
 }

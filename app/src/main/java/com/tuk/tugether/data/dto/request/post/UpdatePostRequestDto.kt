@@ -4,6 +4,7 @@ data class UpdatePostRequestDto(
     val title: String,
     val content: String,
     val goalQuantity: Int,
+    val minParticipants: Int,
     val price: Int,
     val imageUrl: String,
     val deadline: String

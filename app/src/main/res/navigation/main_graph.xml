@@ -50,7 +50,11 @@
         android:id="@+id/postFragment"
         android:name="com.tuk.tugether.presentation.post.PostFragment"
         android:label="PostFragment"
-        tools:layout="@layout/fragment_post"/>
+        tools:layout="@layout/fragment_post">
+        <action
+            android:id="@+id/goToCreatePost"
+            app:destination="@id/createPostFragment" />
+    </fragment>
 
     <!-- profile tab -->
     <fragment

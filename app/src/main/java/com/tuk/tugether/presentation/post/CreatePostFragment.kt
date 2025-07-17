@@ -12,13 +12,16 @@ import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tuk.tugether.R
 import com.tuk.tugether.databinding.FragmentCreatePostBinding
 import com.tuk.tugether.domain.model.request.post.CreatePostRequestModel
+import com.tuk.tugether.domain.model.request.post.UpdatePostRequestModel
 import com.tuk.tugether.presentation.base.BaseFragment
 import com.tuk.tugether.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,12 +32,16 @@ import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+@Suppress("UNREACHABLE_CODE")
 @AndroidEntryPoint
 class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragment_create_post) {
 
     private lateinit var dateBottomSheetBehavior: BottomSheetBehavior<View>
     private val postViewModel: PostViewModel by viewModels()
     private var imageUri: Uri? = null
+    private var isEditMode: Boolean = false
+    private var postIdForEdit: Long? = null
+    private var imageUrlForEdit: String? = null
 
     private val selectImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
@@ -46,6 +53,16 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun initView() {
+        isEditMode = arguments?.getBoolean("isEditMode") == true
+        postIdForEdit = arguments?.getLong("postId", -1L)?.takeIf { it != -1L }
+
+        if (isEditMode && postIdForEdit != null) {
+            val userId = getUserIdFromPrefs().toLongOrNull()
+            if (userId != null) {
+                postViewModel.fetchPostDetail(postIdForEdit!!, userId)
+            }
+        }
+
         bottomNavigationRemove()
         setClickListener()
         initBottomSheets()
@@ -53,6 +70,7 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         setupPriceFormatting()
         handleOnBackPressed()
         setupTitleLengthLimit()
+
     }
 
     override fun initObserver() {
@@ -67,6 +85,35 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
                 findNavController().navigate(R.id.goToPost, bundle, navOptions)
             } else {
                 Toast.makeText(requireContext(), "작성 실패", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            postViewModel.postDetail.collect { post ->
+                if (isEditMode && post != null) {
+                    binding.etCreatePostTitle.setText(post.title)
+                    binding.etCreatePostDescription.setText(post.content)
+                    binding.etCreatePostMinPersonnel.setText(post.minParticipant.toString())
+                    binding.etCreatePostMaxPersonnel.setText(post.goalQuantity.toString())
+                    binding.etCreatePostPrice.setText("₩ ${String.format("%,d", post.price)}")
+                    binding.tvCreatePostDeadline.text = post.deadline.split("T").first()
+
+                    imageUrlForEdit = post.imageUrl
+                    Glide.with(requireContext())
+                        .load("http://13.125.230.122:8080/${post.imageUrl}")
+                        .into(binding.ivCreatePostImage)
+
+                    binding.clCreatePostImage.visibility = View.GONE
+                }
+            }
+        }
+
+
+        postViewModel.updatePostResult.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(requireContext(), "게시글 수정에 실패했습니다", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -98,6 +145,26 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
             val writerId = getUserIdFromPrefs().toLong()
             val deadlineText = binding.tvCreatePostDeadline.text.toString().trim()
             val deadline = "${deadlineText}T23:59:00"
+
+            if (isEditMode) {
+                val imageUrl = imageUrlForEdit ?: run {
+                    Toast.makeText(requireContext(), "수정할 이미지 정보가 없습니다", Toast.LENGTH_SHORT).show()
+                    return@setOnSingleClickListener
+                }
+
+                val updateModel = UpdatePostRequestModel(
+                    title = title,
+                    content = content,
+                    goalQuantity = goalQuantity,
+                    minParticipants = minParticipants,
+                    price = price,
+                    imageUrl = imageUrl,
+                    deadline = deadline
+                )
+
+                postIdForEdit?.let { postViewModel.updatePost(it, updateModel) }
+                return@setOnSingleClickListener
+            }
 
             val dto = CreatePostRequestModel(
                 writerId = writerId,

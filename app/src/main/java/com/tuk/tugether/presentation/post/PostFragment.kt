@@ -1,5 +1,6 @@
 package com.tuk.tugether.presentation.post
 
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -195,6 +196,19 @@ class PostFragment: BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
                 .show()
         }
 
+        binding.tvPostEditBtn.setOnClickListener {
+            val postId = arguments?.getLong("postId", -1L) ?: -1L
+            if (postId == -1L) {
+                Toast.makeText(requireContext(), "게시글 ID가 유효하지 않습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val bundle = Bundle().apply {
+                putLong("postId", postId)
+                putBoolean("isEditMode", true)
+            }
+            findNavController().navigate(R.id.goToCreatePost, bundle)
+        }
 
     }
 
