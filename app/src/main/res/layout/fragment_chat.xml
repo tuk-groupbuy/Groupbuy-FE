@@ -43,15 +43,5 @@
             tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/item_chat_room_list" />
 
-        <TextView
-            android:id="@+id/tv_gotochat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="채팅방으로이동(임시)"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

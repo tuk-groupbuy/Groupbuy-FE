@@ -32,12 +32,12 @@ class ChatFragment: BaseFragment<FragmentChatBinding>(R.layout.fragment_chat) {
         val userId = 6L // 로그인 전 하드코딩된 ID
         viewModel.fetchChatRoomList(userId)
 
-        binding.tvGotochat.setOnClickListener {
-            val intent = Intent(requireContext(), ChatRoomActivity::class.java)
-            val chatRoomId = intent.putExtra("chatRoomId", 5L) // 임시로 5L 전달
-            Log.d("chatFragment", "ChatFragment -> ChatRoom $chatRoomId")
-            startActivity(intent)
-        }
+//        binding.tvGotochat.setOnClickListener {
+//            val intent = Intent(requireContext(), ChatRoomActivity::class.java)
+//            val chatRoomId = intent.putExtra("chatRoomId", 5L) // 임시로 5L 전달
+//            Log.d("chatFragment", "ChatFragment -> ChatRoom $chatRoomId")
+//            startActivity(intent)
+//        }
     }
 
     private fun initRecyclerView() {
