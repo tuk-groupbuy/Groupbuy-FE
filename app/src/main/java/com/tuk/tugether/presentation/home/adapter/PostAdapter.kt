@@ -5,24 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tuk.tugether.databinding.ItemPostBinding
+import com.tuk.tugether.domain.model.response.post.GetAllPostResponseModel
 
 class PostAdapter(
-    private val posts: List<Post>,
-    private val onItemClick: (Post) -> Unit
+    private val posts: List<GetAllPostResponseModel>,
+    private val onItemClick: (GetAllPostResponseModel) -> Unit
 ) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     inner class PostViewHolder(private val binding: ItemPostBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(post: Post) {
+        fun bind(post: GetAllPostResponseModel) {
             binding.tvPostTitle.text = post.title
-            binding.tvPostDeadline.text = post.deadline
-            binding.tvPostPrice.text = post.price
-            binding.tvPostPersonnel.text = post.personnel
+            binding.tvPostDeadline.text = post.deadlineText
+            binding.tvPostPrice.text = "${post.price}원"
+            binding.tvPostPersonnel.text = "${post.currentQuantity} / ${post.goalQuantity}"
 
             // 이미지 로딩
             Glide.with(binding.root.context)
-                .load(post.imageUrl)
+                .load("http://13.125.230.122:8080/${post.imageUrl.replace("\\", "/")}")
                 .into(binding.ivPostImage)
 
             // 클릭 리스너 연결

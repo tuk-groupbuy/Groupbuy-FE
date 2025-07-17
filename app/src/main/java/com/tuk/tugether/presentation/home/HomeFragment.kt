@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,6 +14,8 @@ import com.tuk.tugether.presentation.base.BaseFragment
 import com.tuk.tugether.presentation.home.adapter.PostAdapter
 import com.tuk.tugether.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -25,10 +28,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initRecyclerView()
         initSearchInputListener()
         setClickListener()
+
     }
 
     override fun initObserver() {
         observePostList()
+        viewModel.getAllPosts()
     }
 
     // BottomNavigationView 보이기
@@ -88,11 +93,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
     private fun observePostList() {
-        viewModel.postList.observe(viewLifecycleOwner) { posts ->
-            postAdapter = PostAdapter(posts) { post ->
-                findNavController().navigate(R.id.goToPost)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.postList.collectLatest { posts ->
+                postAdapter = PostAdapter(posts) { post ->
+                    findNavController().navigate(R.id.goToPost)
+                }
+                binding.rvHomePicture.adapter = postAdapter
             }
-            binding.rvHomePicture.adapter = postAdapter
         }
     }
 
