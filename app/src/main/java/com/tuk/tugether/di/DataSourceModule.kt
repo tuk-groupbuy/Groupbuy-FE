@@ -1,5 +1,7 @@
 package com.tuk.tugether.di
 
+import com.tuk.tugether.data.datasource.post.PostDataSource
+import com.tuk.tugether.data.datasourceImpl.post.PostDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,10 +12,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
 
-    /*
     @Provides
     @Singleton
     fun providePostDataSource(postDataSourceImpl: PostDataSourceImpl): PostDataSource =
         postDataSourceImpl
-*/
+
 }

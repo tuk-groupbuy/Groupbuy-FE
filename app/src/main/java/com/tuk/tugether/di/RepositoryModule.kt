@@ -1,13 +1,16 @@
 package com.tuk.tugether.di
 
 import com.tuk.tugether.data.repositoryImpl.TestRepositoryImpl
+import com.tuk.tugether.data.repositoryImpl.post.PostRepositoryImpl
 import com.tuk.tugether.data.service.TestService
+import com.tuk.tugether.domain.repository.PostRepository
 import com.tuk.tugether.domain.repository.TestRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -21,4 +24,10 @@ object RepositoryModule {
     fun providesTestRepository(
         testService: TestService
     ): TestRepository = TestRepositoryImpl(testService)
+
+    @Singleton
+    @Provides
+    fun providesPostRepository(
+        postRepositoryImpl: PostRepositoryImpl
+    ): PostRepository = postRepositoryImpl
 }
