@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
             postRepository.getAllPosts()
                 .onSuccess { result ->
                     Log.d("HomeViewModel", "게시물 목록 불러오기 성공: $result")
-                    _postList.value = result
+                    _postList.value = result.reversed()
                 }
                 .onFailure { exception ->
                     Log.e("HomeViewModel", "게시물 목록 불러오기 실패", exception)
