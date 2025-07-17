@@ -36,5 +36,18 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun searchPost(keyword: String) {
+        viewModelScope.launch {
+            postRepository.searchPosts(keyword)
+                .onSuccess { result ->
+                    _postList.value = result.reversed()
+                }
+                .onFailure { exception ->
+                    Log.e("HomeViewModel", "검색 실패", exception)
+                    _postList.value = emptyList()
+                }
+        }
+    }
+
 }
 

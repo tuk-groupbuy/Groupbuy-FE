@@ -3,6 +3,7 @@ package com.tuk.tugether.presentation.home
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -56,6 +57,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun observePostList() {
         viewModel.postList.observe(viewLifecycleOwner) { posts ->
+            if (posts.isEmpty()) {
+                Toast.makeText(requireContext(), "검색 실패", Toast.LENGTH_SHORT).show()
+            }
             postAdapter.updateData(posts)
         }
     }
@@ -64,6 +68,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.etHomeSearch.addTextChangedListener {
             val inputText = it?.toString() ?: ""
             binding.ivHomeDelete.visibility = if (inputText.isEmpty()) View.INVISIBLE else View.VISIBLE
+        }
+
+        binding.etHomeSearch.setOnEditorActionListener { v, actionId, event ->
+            val keyword = binding.etHomeSearch.text.toString()
+            if (keyword.isNotBlank()) {
+                viewModel.searchPost(keyword)
+                hideKeyboard()
+            }
+            true
         }
     }
 
@@ -98,4 +111,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         imm.hideSoftInputFromWindow(binding.etHomeSearch.windowToken, 0)
         binding.etHomeSearch.clearFocus()
     }
+
 }

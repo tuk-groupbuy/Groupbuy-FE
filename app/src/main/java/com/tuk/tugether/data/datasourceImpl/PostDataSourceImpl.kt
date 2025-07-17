@@ -6,6 +6,7 @@ import com.tuk.tugether.data.dto.request.post.JoinPostRequestDto
 import com.tuk.tugether.data.dto.request.post.UpdatePostRequestDto
 import com.tuk.tugether.data.dto.response.post.GetAllPostResponseDto
 import com.tuk.tugether.data.dto.response.post.GetPostDetailResponseDto
+import com.tuk.tugether.data.dto.response.post.SearchPostResponseDto
 import com.tuk.tugether.data.service.PostService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -34,5 +35,9 @@ private val postService: PostService
 
     override suspend fun deleteJoinPost(body: DeleteJoinPostRequestDto): String =
         postService.deleteJoinPost(body)
+
+    override suspend fun searchPosts(keyword: String): SearchPostResponseDto =
+        postService.searchPosts(keyword)
+
 }
 
