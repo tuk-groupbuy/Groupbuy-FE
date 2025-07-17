@@ -19,6 +19,7 @@
         <activity
             android:name=".presentation.login.LoginActivity"
             android:exported="true"
+            android:theme="@style/Theme.App.Starting"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -38,6 +39,10 @@
             android:name=".presentation.chat.ChatRoomActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.profile.EditProfileActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
         <!-- Trigger Google Play services to install the backported photo picker module. -->
         <service android:name="com.google.android.gms.metadata.ModuleDependencies"
             android:enabled="false"

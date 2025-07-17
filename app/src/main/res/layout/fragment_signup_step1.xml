@@ -94,7 +94,7 @@
                     android:background="@drawable/shape_rect_20_blue200_fill"
                     android:hint="인증 번호"
                     android:textColorHint="@color/blue_400"
-                    android:inputType="number"
+                    android:inputType="textVisiblePassword"
                     android:padding="12dp"
                     style="@style/TextAppearance.TUgether.Body1"
                     app:layout_constraintEnd_toEndOf="parent"
