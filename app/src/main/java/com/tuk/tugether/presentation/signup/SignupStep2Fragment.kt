@@ -1,7 +1,11 @@
 package com.tuk.tugether.presentation.signup
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -14,6 +18,16 @@ class SignupStep2Fragment :
 
     private val viewModel: SignupViewModel by activityViewModels()
 
+    private var selectedImageUri: Uri? = null
+    private val imagePickerLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            selectedImageUri = result.data?.data
+            binding.ivProfile.setImageURI(selectedImageUri)
+        }
+    }
+
     override fun initView() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -21,6 +35,12 @@ class SignupStep2Fragment :
         // 뒤로가기 버튼
         binding.ivTopbarBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.ivProfile.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            imagePickerLauncher.launch(intent)
         }
 
         // 닉네임 입력 감지
