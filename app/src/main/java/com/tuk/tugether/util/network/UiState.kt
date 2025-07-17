@@ -12,4 +12,6 @@ sealed interface UiState<out T> {
     data class Failure(
         val msg: String,
     ) : UiState<Nothing>
+
+    data class Error(val error: Throwable?) : UiState<Nothing>
 }

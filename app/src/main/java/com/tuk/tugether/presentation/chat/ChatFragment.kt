@@ -4,6 +4,8 @@ import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.View
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tuk.tugether.presentation.base.BaseFragment
 import com.tuk.tugether.R
 import com.tuk.tugether.databinding.FragmentChatBinding
@@ -17,6 +19,7 @@ class ChatFragment: BaseFragment<FragmentChatBinding>(R.layout.fragment_chat) {
     private lateinit var chatRoomRVA: ChatRoomRVA
 
     override fun initObserver() {
+        bottomNavigationShow()
         viewModel.chatRoomList.observe(viewLifecycleOwner) { chatRoomList ->
             chatRoomRVA.submitList(chatRoomList)
         }
@@ -59,5 +62,12 @@ class ChatFragment: BaseFragment<FragmentChatBinding>(R.layout.fragment_chat) {
         super.onResume()
         // 화면 다시 보일 때 리스트 최신화
         viewModel.fetchChatRoomList(6L)
+    }
+
+    // BottomNavigationView 보이기
+    private fun bottomNavigationShow() {
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.main_bnv)
+        bottomNavigationView?.visibility = View.VISIBLE
     }
 }

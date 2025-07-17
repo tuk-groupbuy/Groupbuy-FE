@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:name=".TUgetherApplication"
@@ -16,8 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="35">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.login.LoginActivity"
             android:exported="true"
+            android:theme="@style/Theme.App.Starting"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -26,10 +28,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".presentation.MainActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".presentation.signup.SignupActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
+        <activity
             android:name=".presentation.chat.ChatRoomActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".presentation.profile.EditProfileActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
         <!-- Trigger Google Play services to install the backported photo picker module. -->
         <service android:name="com.google.android.gms.metadata.ModuleDependencies"
             android:enabled="false"

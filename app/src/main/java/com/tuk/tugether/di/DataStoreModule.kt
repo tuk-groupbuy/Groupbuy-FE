@@ -17,5 +17,4 @@ object DataStoreModule {
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =
         context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
 
-
 }

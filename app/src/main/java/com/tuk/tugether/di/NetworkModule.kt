@@ -1,8 +1,10 @@
 package com.tuk.tugether.di
 
+import android.content.SharedPreferences
 import com.google.gson.GsonBuilder
 import com.tuk.tugether.R
 import com.tuk.tugether.TUgetherApplication
+import com.tuk.tugether.util.network.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,16 +39,17 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesOkHttpClient(
+        authInterceptor: AuthInterceptor // 인터셉터 주입
     ): OkHttpClient {
         val interceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
         return OkHttpClient.Builder().apply {
-
+            addInterceptor(authInterceptor) // 인증 인터셉터 추가
             addInterceptor(interceptor)
-            connectTimeout(5, TimeUnit.SECONDS)
-            readTimeout(5, TimeUnit.SECONDS)
-            writeTimeout(5, TimeUnit.SECONDS)
+            connectTimeout(60, TimeUnit.SECONDS)
+            readTimeout(60, TimeUnit.SECONDS)
+            writeTimeout(60, TimeUnit.SECONDS)
         }.build()
     }
 
@@ -62,4 +65,10 @@ object NetworkModule {
             .client(client)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthInterceptor(sharedPreferences: SharedPreferences): AuthInterceptor =
+        AuthInterceptor(sharedPreferences)
+
 }

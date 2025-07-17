@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_graph"
+    app:startDestination="@id/signupStep1Fragment">
+
+    <fragment
+        android:id="@+id/signupStep1Fragment"
+        android:name="com.tuk.tugether.presentation.signup.SignupStep1Fragment"
+        android:label="회원가입"
+        tools:layout="@layout/fragment_signup_step1" >
+        <action
+            android:id="@+id/action_signupStep1Fragment_to_signupStep2Fragment"
+            app:destination="@id/signupStep2Fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupStep2Fragment"
+        android:name="com.tuk.tugether.presentation.signup.SignupStep2Fragment"
+        android:label="프로필 설정"
+        tools:layout="@layout/fragment_signup_step2" >
+        <action
+            android:id="@+id/action_signupStep2Fragment_to_signupStep3Fragment"
+            app:destination="@id/signupCompleteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupCompleteFragment"
+        android:name="com.tuk.tugether.presentation.signup.SignupStep3Fragment"
+        android:label="회원가입 완료"
+        tools:layout="@layout/fragment_signup_step3" />
+</navigation>
