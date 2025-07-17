@@ -8,7 +8,7 @@
             name="viewModel"
             type="com.tuk.tugether.presentation.profile.EditProfileViewModel" />
 
-        <!-- 유저 데이터 (생략 가능, viewModel.user를 직접 써도 됨) -->
+        <!-- 유저 데이터 -->
         <variable
             name="user"
             type="com.tuk.tugether.domain.model.User" />
@@ -94,11 +94,11 @@
 
                 <!-- 사용자 이름 -->
                 <TextView
-                    android:id="@+id/tv_user_name"
+                    android:id="@+id/tv_user_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@{user.name ?? `사용자 이름`}"
+                    android:text="@{user.nickname != null ? user.nickname : `사용자 이름`}"
                     android:textSize="24sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@id/tv_user_name">
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_nickname">
 
                     <TextView
                         android:id="@+id/tv_email_label"
@@ -128,7 +128,7 @@
                         android:id="@+id/tv_email_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{user.email ?? `이메일 정보 없음`}"
+                        android:text="@{user.email != null ? user.email : `이메일 정보 없음`}"
                         android:textSize="16sp"
                         android:textColor="@color/blue_400"
                         android:autoLink="email" />
@@ -157,7 +157,7 @@
                         android:id="@+id/tv_join_date_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{user.joinDate ?? `가입일 정보 없음`}"
+                        android:text="@{user.joinDate != null ? user.joinDate : `가입일 정보 없음`}"
                         android:textSize="16sp"
                         android:textColor="@color/black" />
 

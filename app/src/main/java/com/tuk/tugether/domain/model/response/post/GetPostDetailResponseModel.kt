@@ -8,10 +8,11 @@ data class GetPostDetailResponseModel(
     val price: Int,
     val imageUrl: String,
     val currentQuantity: Int,
+    val minParticipant: Int,
     val createdAt: String,
     val writerName: String,
     val writerId: Long,
-    val deadlineText: String,
+    val deadline: String,
     val isWriter: Boolean,
     val participationStatus: String,
     val completed: Boolean

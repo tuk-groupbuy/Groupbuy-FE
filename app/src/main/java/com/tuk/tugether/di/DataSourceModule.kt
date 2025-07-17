@@ -1,5 +1,6 @@
 package com.tuk.tugether.di
 
+
 import com.tuk.tugether.data.datasource.NotificationDataSource
 import com.tuk.tugether.data.datasourceImpl.NotificationDataSourceImpl
 import com.tuk.tugether.data.datasource.PostDataSource
@@ -23,4 +24,5 @@ object DataSourceModule {
     @Singleton
     fun provideNotificationDataSource(notificationDataSourceImpl: NotificationDataSourceImpl): NotificationDataSource =
         notificationDataSourceImpl
+
 }

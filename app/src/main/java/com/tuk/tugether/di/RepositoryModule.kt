@@ -7,6 +7,9 @@ import com.tuk.tugether.data.repositoryImpl.TestRepositoryImpl
 import com.tuk.tugether.data.repositoryImpl.PostRepositoryImpl
 import com.tuk.tugether.data.service.TestService
 import com.tuk.tugether.domain.repository.NotificationRepository
+import com.tuk.tugether.data.repositoryImpl.TestRepositoryImpl
+import com.tuk.tugether.data.repositoryImpl.post.PostRepositoryImpl
+import com.tuk.tugether.data.service.TestService
 import com.tuk.tugether.domain.repository.PostRepository
 import com.tuk.tugether.domain.repository.TestRepository
 import dagger.Module
@@ -41,5 +44,4 @@ object RepositoryModule {
     fun providesPostRepository(
         postRepositoryImpl: PostRepositoryImpl
     ): PostRepository = postRepositoryImpl
-
 }
