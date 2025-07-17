@@ -21,7 +21,7 @@ class AlarmAdapter(
             binding.tvAlarmPersonnel.text = "${alarm.current}/${alarm.max}"
 
             val requestAdapter = AlarmRequestAdapter(
-                alarm.requests.toMutableList(), // ✅ 여기 중요: MutableList로 변환
+                alarm.requests.toMutableList(),
                 onApprove,
                 onReject
             )

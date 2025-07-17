@@ -1,5 +1,7 @@
 package com.tuk.tugether.presentation.post
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tuk.tugether.domain.model.request.post.DeleteJoinPostRequestModel
@@ -10,6 +12,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +29,17 @@ class PostViewModel @Inject constructor(
 
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> = _errorMessage
+
+    private val _createPostResult = MutableLiveData<Boolean>()
+    val createPostResult: LiveData<Boolean> = _createPostResult
+
+
+    fun createPost(dto: RequestBody, file: MultipartBody.Part) {
+        viewModelScope.launch {
+            val result = postRepository.createPost(dto, file)
+            _createPostResult.value = result.isSuccess
+        }
+    }
 
     fun fetchPostDetail(postId: Long, requesterId: Long) {
         viewModelScope.launch {

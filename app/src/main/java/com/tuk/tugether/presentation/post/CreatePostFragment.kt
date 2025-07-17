@@ -1,5 +1,6 @@
 package com.tuk.tugether.presentation.post
 
+import android.net.Uri
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,15 +10,20 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tuk.tugether.R
 import com.tuk.tugether.databinding.FragmentCreatePostBinding
+import com.tuk.tugether.domain.model.request.post.CreatePostRequestModel
 import com.tuk.tugether.presentation.base.BaseFragment
 import com.tuk.tugether.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -26,9 +32,12 @@ import java.time.format.DateTimeFormatter
 class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragment_create_post) {
 
     private lateinit var dateBottomSheetBehavior: BottomSheetBehavior<View>
+    private val postViewModel: PostViewModel by viewModels()
+    private var imageUri: Uri? = null
 
     private val selectImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
+            imageUri = it
             binding.ivCreatePostImage.setImageURI(it)
             binding.clCreatePostImage.visibility = View.GONE
         }
@@ -45,7 +54,18 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         setupTitleLengthLimit()
     }
 
-    override fun initObserver() {}
+    override fun initObserver() {
+        postViewModel.createPostResult.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.createPostFragment, true)
+                    .build()
+                findNavController().navigate(R.id.goToPost, null, navOptions)
+            } else {
+                Toast.makeText(requireContext(), "작성 실패", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     // 뒤로 가기
     private fun handleOnBackPressed() {
@@ -65,11 +85,43 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         binding.tvCreatePostCompleteBtn.setOnSingleClickListener {
             if (!isFormValid()) return@setOnSingleClickListener
 
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.createPostFragment, true)
-                .build()
-            findNavController().navigate(R.id.goToPost, null, navOptions)
+            val title = binding.etCreatePostTitle.text.toString().trim()
+            val price = binding.etCreatePostPrice.text.toString().replace("[^\\d]".toRegex(), "").toInt()
+            val content = binding.etCreatePostDescription.text.toString().trim()
+            val goalQuantity = binding.etCreatePostMaxPersonnel.text.toString().trim().toInt()
+            val writerId = getUserIdFromPrefs().toLong()
+            val deadlineText = binding.tvCreatePostDeadline.text.toString().trim()
+            val deadline = "${deadlineText}T23:59:00"
+
+            val dto = CreatePostRequestModel(
+                writerId = writerId,
+                title = title,
+                content = content,
+                goalQuantity = goalQuantity,
+                price = price,
+                deadline = deadline
+            )
+
+            val gson = com.google.gson.Gson()
+            val json = gson.toJson(dto.toCreatePostRequestDto())
+            val dtoRequestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+
+            if (imageUri == null) {
+                Toast.makeText(requireContext(), "이미지를 선택해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnSingleClickListener
+            }
+
+            val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
+            val imageBytes = inputStream?.readBytes()
+            val filePart = MultipartBody.Part.createFormData(
+                "file",
+                "image.jpg",
+                imageBytes!!.toRequestBody("image/*".toMediaTypeOrNull())
+            )
+
+            postViewModel.createPost(dtoRequestBody, filePart)
         }
+
 
         binding.ivTopbarBack.setOnClickListener {
             findNavController().popBackStack()
@@ -249,4 +301,8 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
         })
     }
 
+    private fun getUserIdFromPrefs(): String {
+        val prefs = requireActivity().getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
+        return prefs.getString("user_id", "") ?: ""
+    }
 }
