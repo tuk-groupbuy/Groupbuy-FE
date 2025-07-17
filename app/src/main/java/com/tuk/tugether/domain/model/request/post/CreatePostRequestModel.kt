@@ -7,10 +7,11 @@ data class CreatePostRequestModel(
     val title: String,
     val content: String,
     val goalQuantity: Int,
+    val minParticipants: Int,
     val price: Int,
     val deadline: String
 ) {
     fun toCreatePostRequestDto() =
-        CreatePostRequestDto(writerId, title, content, goalQuantity, price, deadline)
+        CreatePostRequestDto(writerId, title, content, goalQuantity, minParticipants, price, deadline)
 }
 

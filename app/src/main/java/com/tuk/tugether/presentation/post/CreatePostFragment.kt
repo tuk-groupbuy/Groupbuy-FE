@@ -2,6 +2,7 @@ package com.tuk.tugether.presentation.post
 
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -55,17 +56,21 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
     }
 
     override fun initObserver() {
-        postViewModel.createPostResult.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
+        postViewModel.createPostResult.observe(viewLifecycleOwner) { postId ->
+            if (postId != null && postId > 0) {
+                val bundle = Bundle().apply {
+                    putLong("postId", postId)
+                }
                 val navOptions = NavOptions.Builder()
                     .setPopUpTo(R.id.createPostFragment, true)
                     .build()
-                findNavController().navigate(R.id.goToPost, null, navOptions)
+                findNavController().navigate(R.id.goToPost, bundle, navOptions)
             } else {
                 Toast.makeText(requireContext(), "작성 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
     // 뒤로 가기
     private fun handleOnBackPressed() {
@@ -89,6 +94,7 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
             val price = binding.etCreatePostPrice.text.toString().replace("[^\\d]".toRegex(), "").toInt()
             val content = binding.etCreatePostDescription.text.toString().trim()
             val goalQuantity = binding.etCreatePostMaxPersonnel.text.toString().trim().toInt()
+            val minParticipants = binding.etCreatePostMinPersonnel.text.toString().trim().toInt()
             val writerId = getUserIdFromPrefs().toLong()
             val deadlineText = binding.tvCreatePostDeadline.text.toString().trim()
             val deadline = "${deadlineText}T23:59:00"
@@ -98,6 +104,7 @@ class CreatePostFragment: BaseFragment<FragmentCreatePostBinding>(R.layout.fragm
                 title = title,
                 content = content,
                 goalQuantity = goalQuantity,
+                minParticipants = minParticipants,
                 price = price,
                 deadline = deadline
             )

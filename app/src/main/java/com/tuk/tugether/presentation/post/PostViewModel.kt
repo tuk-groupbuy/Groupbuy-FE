@@ -30,15 +30,23 @@ class PostViewModel @Inject constructor(
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> = _errorMessage
 
-    private val _createPostResult = MutableLiveData<Boolean>()
-    val createPostResult: LiveData<Boolean> = _createPostResult
-
+    private val _createPostResult = MutableLiveData<Long?>()
+    val createPostResult: LiveData<Long?> = _createPostResult
 
     fun createPost(dto: RequestBody, file: MultipartBody.Part) {
         viewModelScope.launch {
             val result = postRepository.createPost(dto, file)
-            _createPostResult.value = result.isSuccess
+            val message = result.getOrNull()
+            val postId = extractPostIdFromMessage(message)
+            _createPostResult.value = postId
         }
+    }
+
+    private fun extractPostIdFromMessage(message: String?): Long? {
+        if (message == null) return null
+        val regex = Regex("""ID:\s*(\d+)""")
+        val match = regex.find(message)
+        return match?.groups?.get(1)?.value?.toLongOrNull()
     }
 
     fun fetchPostDetail(postId: Long, requesterId: Long) {
@@ -81,5 +89,4 @@ class PostViewModel @Inject constructor(
             )
         }
     }
-
 }
