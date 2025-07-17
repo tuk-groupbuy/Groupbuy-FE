@@ -74,7 +74,7 @@ class PostFragment: BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
         tvPostDescription.text = post.content
         tvPostPersonnel.text =
             "현재 ${post.currentQuantity}명    ∙    최소 ${post.minParticipant}명    ∙    최대 ${post.goalQuantity}명"
-        tvPostDeadline.text = post.deadline
+        tvPostDeadline.text = post.deadline.split("T").first()
 
         // 이미지 로딩 (Glide 필요)
         Glide.with(requireContext())
