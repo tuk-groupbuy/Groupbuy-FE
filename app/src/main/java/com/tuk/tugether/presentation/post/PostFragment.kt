@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.adapters.ViewBindingAdapter.setClickListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -59,6 +60,15 @@ class PostFragment: BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
                 }
             }
         }
+
+        postViewModel.deletePostResult.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(requireContext(), "삭제 실패", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
 
@@ -167,6 +177,24 @@ class PostFragment: BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
                 binding.tvPostJoinBtn.setTextColor(requireContext().getColor(R.color.black_main))
             }
         }
+
+        binding.tvPostDeleteBtn.setOnClickListener {
+            val postId = arguments?.getLong("postId", -1L) ?: -1L
+            if (postId == -1L) {
+                Toast.makeText(requireContext(), "삭제할 게시글 ID가 유효하지 않습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            AlertDialog.Builder(requireContext())
+                .setTitle("정말로 삭제하시겠습니까?")
+                .setMessage("삭제 후에는 복구가 불가능합니다.")
+                .setPositiveButton("삭제") { _, _ ->
+                    postViewModel.deletePost(postId)
+                }
+                .setNegativeButton("취소", null)
+                .show()
+        }
+
 
     }
 

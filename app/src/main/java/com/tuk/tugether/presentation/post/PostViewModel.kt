@@ -33,6 +33,10 @@ class PostViewModel @Inject constructor(
     private val _createPostResult = MutableLiveData<Long?>()
     val createPostResult: LiveData<Long?> = _createPostResult
 
+    private val _deletePostResult = MutableLiveData<Boolean>()
+    val deletePostResult: LiveData<Boolean> = _deletePostResult
+
+
     fun createPost(dto: RequestBody, file: MultipartBody.Part) {
         viewModelScope.launch {
             val result = postRepository.createPost(dto, file)
@@ -85,6 +89,21 @@ class PostViewModel @Inject constructor(
                 },
                 onFailure = { throwable ->
                     _errorMessage.value = throwable.message ?: "참여 취소 요청 실패"
+                }
+            )
+        }
+    }
+
+    fun deletePost(postId: Long) {
+        viewModelScope.launch {
+            val result = postRepository.deletePost(postId)
+            result.fold(
+                onSuccess = {
+                    _deletePostResult.value = true
+                },
+                onFailure = {
+                    _deletePostResult.value = false
+                    _errorMessage.value = it.message ?: "게시글 삭제 실패"
                 }
             )
         }
