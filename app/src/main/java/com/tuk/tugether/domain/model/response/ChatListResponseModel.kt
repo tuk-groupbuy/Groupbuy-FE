@@ -11,6 +11,6 @@ data class ChatListResponseModel(
         val imageUrl: String,
         val lastChatMessage: String,
         val isRead: Boolean?,
-        val sendAt: String
+        val sendAt: String?
     )
 }

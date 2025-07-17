@@ -25,9 +25,9 @@ class ChatParticipantRVA(
     inner class ChatParticipantViewHolder(private val binding: ItemChatParticipantBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ParticipantListResponseModel.ChatRoomUserModel) {
-            binding.tvReceiverNickname.text = item.userId.toString()
+            binding.tvReceiverNickname.text = item.nickname
 
-            binding.ivReceiverProfile.setImageResource(R.drawable.ic_person)
+            binding.ivReceiverProfile.setImageResource(R.drawable.ic_ex_person)
 
 //            Glide.with(binding.ivReceiverProfile.context)
 //                .load(item.)

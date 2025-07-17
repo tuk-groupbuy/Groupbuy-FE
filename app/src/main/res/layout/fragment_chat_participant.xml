@@ -24,7 +24,7 @@
                 android:id="@+id/tv_chat_participant_topbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="채팅방 이름"
+                android:text="채팅방"
                 style="@style/TextAppearance.TUgether.Bold.Body1"
                 android:textSize="20sp"
                 app:layout_constraintTop_toTopOf="parent"

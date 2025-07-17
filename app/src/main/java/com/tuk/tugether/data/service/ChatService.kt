@@ -1,10 +1,9 @@
 package com.tuk.tugether.data.service
 
-import com.tuk.tugether.data.dto.request.CommonChatRequestDto
-import com.tuk.tugether.data.dto.request.CreateChatRequestDto
+import com.tuk.tugether.data.dto.request.chat.CommonChatRequestDto
+import com.tuk.tugether.data.dto.request.chat.CreateChatRequestDto
 import com.tuk.tugether.data.dto.response.chat.ChatListResponseDto
 import com.tuk.tugether.data.dto.response.chat.ChatMessageResponseDto
-import com.tuk.tugether.data.dto.response.chat.ChatResponse
 import com.tuk.tugether.data.dto.response.chat.CommonChatResponseDto
 import com.tuk.tugether.data.dto.response.chat.CreateChatResponseDto
 import com.tuk.tugether.data.dto.response.chat.ParticipantListResponseDto
@@ -54,6 +53,8 @@ interface ChatService {
     // 채팅방 메세지 조회
     @GET("chat/message/{chatRoomId}")
     suspend fun fetchChatMessage(
-        @Path("chatRoomId") chatRoomId: Long
+        @Path("chatRoomId") chatRoomId: Long,
+        @Query("page") page: Int,
+        @Query("size") size: Int
     ): ChatMessageResponseDto
 }

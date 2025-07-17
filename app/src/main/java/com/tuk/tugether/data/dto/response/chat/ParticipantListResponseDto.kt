@@ -9,10 +9,11 @@ data class ParticipantListResponseDto(
 ) {
     data class ChatRoomUserDto(
         val userId: Long,
+        val nickname: String,
         val owner: Boolean
     ) {
         fun toChatRoomUserModel() =
-            ParticipantListResponseModel.ChatRoomUserModel(userId, owner)
+            ParticipantListResponseModel.ChatRoomUserModel(userId, nickname, owner)
     }
 
     fun toParticipantListResponseModel() =

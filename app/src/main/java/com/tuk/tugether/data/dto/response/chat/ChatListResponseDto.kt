@@ -13,7 +13,7 @@ data class ChatListResponseDto(
         val imageUrl: String,
         val lastChatMessage: String,
         val isRead: Boolean?,
-        val sendAt: String
+        val sendAt: String?
     ) {
         fun toChatRoomPreviewModel() = ChatListResponseModel.ChatRoomModel(
             chatRoomId = chatRoomId,

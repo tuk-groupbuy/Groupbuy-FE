@@ -110,4 +110,7 @@ dependencies {
     // moshi
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
+
+    // paging3
+    implementation ("androidx.paging:paging-runtime-ktx:3.2.1")
 }

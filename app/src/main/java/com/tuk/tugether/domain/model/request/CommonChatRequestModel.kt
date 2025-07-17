@@ -1,6 +1,6 @@
 package com.tuk.tugether.domain.model.request
 
-import com.tuk.tugether.data.dto.request.CommonChatRequestDto
+import com.tuk.tugether.data.dto.request.chat.CommonChatRequestDto
 
 data class CommonChatRequestModel(
     val userId: Long,

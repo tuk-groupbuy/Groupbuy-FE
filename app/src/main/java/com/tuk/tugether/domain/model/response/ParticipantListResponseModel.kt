@@ -7,6 +7,7 @@ data class ParticipantListResponseModel(
 ) {
     data class ChatRoomUserModel(
         val userId: Long,
+        val nickname: String,
         val owner: Boolean
     )
 }

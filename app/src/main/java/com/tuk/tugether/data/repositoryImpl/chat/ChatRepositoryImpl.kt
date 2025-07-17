@@ -1,5 +1,6 @@
 package com.tuk.tugether.data.repositoryImpl.chat
 
+import android.content.SharedPreferences
 import com.tuk.tugether.data.datasource.chat.ChatDataSource
 import com.tuk.tugether.domain.model.request.CommonChatRequestModel
 import com.tuk.tugether.domain.model.request.CreateChatRequestModel
@@ -12,7 +13,8 @@ import com.tuk.tugether.domain.repository.chat.ChatRepository
 import javax.inject.Inject
 
 class ChatRepositoryImpl @Inject constructor(
-    private val chatDataSource: ChatDataSource
+    private val chatDataSource: ChatDataSource,
+    private val spf: SharedPreferences
 ): ChatRepository {
     override suspend fun fetchChatParticipantUserList(chatRoomId: Long): Result<ParticipantListResponseModel> = runCatching {
         chatDataSource.fetchChatParticipantUserList(chatRoomId).toParticipantListResponseModel()
@@ -39,8 +41,8 @@ class ChatRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun fetchChatMessage(chatRoomId: Long): Result<ChatMessageResponseModel> = runCatching {
-        chatDataSource.fetchChatMessage(chatRoomId).toChatMessageResponseModel()
+    override suspend fun fetchChatMessage(chatRoomId: Long, page: Int, size: Int): Result<ChatMessageResponseModel> = runCatching {
+        chatDataSource.fetchChatMessage(chatRoomId, page, size).toChatMessageResponseModel(spf.getString("nick_name", "김태건")?:"김태건")
     }
 
 }
