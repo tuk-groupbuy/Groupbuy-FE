@@ -1,7 +1,6 @@
-package com.tuk.tugether.data.datasourceImpl.post
+package com.tuk.tugether.data.datasourceImpl
 
-import com.tuk.tugether.data.datasource.post.PostDataSource
-import com.tuk.tugether.data.dto.BaseResponse
+import com.tuk.tugether.data.datasource.PostDataSource
 import com.tuk.tugether.data.dto.request.post.DeleteJoinPostRequestDto
 import com.tuk.tugether.data.dto.request.post.JoinPostRequestDto
 import com.tuk.tugether.data.dto.request.post.UpdatePostRequestDto

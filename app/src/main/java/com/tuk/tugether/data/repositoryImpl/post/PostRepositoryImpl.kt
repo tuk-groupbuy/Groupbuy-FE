@@ -1,6 +1,6 @@
 package com.tuk.tugether.data.repositoryImpl.post
 
-import com.tuk.tugether.data.datasource.post.PostDataSource
+import com.tuk.tugether.data.datasource.PostDataSource
 import com.tuk.tugether.data.dto.response.post.toModel
 import com.tuk.tugether.domain.model.request.post.DeleteJoinPostRequestModel
 import com.tuk.tugether.domain.model.request.post.JoinPostRequestModel

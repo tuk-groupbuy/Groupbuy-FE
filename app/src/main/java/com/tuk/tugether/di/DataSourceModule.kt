@@ -1,7 +1,7 @@
 package com.tuk.tugether.di
 
-import com.tuk.tugether.data.datasource.post.PostDataSource
-import com.tuk.tugether.data.datasourceImpl.post.PostDataSourceImpl
+import com.tuk.tugether.data.datasource.PostDataSource
+import com.tuk.tugether.data.datasourceImpl.PostDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
