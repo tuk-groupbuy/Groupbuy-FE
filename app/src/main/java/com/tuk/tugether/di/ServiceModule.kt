@@ -1,6 +1,7 @@
 package com.tuk.tugether.di
 
 import com.tuk.tugether.data.service.NotificationService
+import com.tuk.tugether.data.service.PostService
 import com.tuk.tugether.data.service.TestService
 import dagger.Module
 import dagger.Provides
@@ -25,6 +26,12 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideNotificationService(retrofit: Retrofit): NotificationService {
+        return retrofit.buildService()
+    }
+
+    @Provides
+    @Singleton
+    fun providePostService(retrofit: Retrofit): PostService {
         return retrofit.buildService()
     }
 }
