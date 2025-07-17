@@ -20,7 +20,12 @@ class AlarmAdapter(
             binding.tvAlarmPresent.text = "현재"
             binding.tvAlarmPersonnel.text = "${alarm.current}/${alarm.max}"
 
-            val requestAdapter = AlarmRequestAdapter(alarm.requests, onApprove, onReject)
+            val requestAdapter = AlarmRequestAdapter(
+                alarm.requests.toMutableList(), // ✅ 여기 중요: MutableList로 변환
+                onApprove,
+                onReject
+            )
+
             binding.rvAlarm.adapter = requestAdapter
             binding.rvAlarm.layoutManager = LinearLayoutManager(
                 binding.root.context,
