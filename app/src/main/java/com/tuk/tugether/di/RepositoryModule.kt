@@ -5,15 +5,18 @@ import android.content.Context
 import com.tuk.tugether.data.repositoryImpl.NotificationRepositoryImpl
 import com.tuk.tugether.data.repositoryImpl.PostRepositoryImpl
 import com.tuk.tugether.data.repositoryImpl.TestRepositoryImpl
+import com.tuk.tugether.data.repositoryImpl.chat.ChatRepositoryImpl
 import com.tuk.tugether.data.service.TestService
 import com.tuk.tugether.domain.repository.NotificationRepository
 import com.tuk.tugether.domain.repository.PostRepository
 import com.tuk.tugether.domain.repository.TestRepository
+import com.tuk.tugether.domain.repository.chat.ChatRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
@@ -24,8 +27,8 @@ object RepositoryModule {
     @Singleton
     fun provideApplicationContext(application: Application): Context = application
 
-    @ViewModelScoped
     @Provides
+    @ViewModelScoped
     fun providesTestRepository(
         testService: TestService
     ): TestRepository = TestRepositoryImpl(testService)
@@ -41,4 +44,10 @@ object RepositoryModule {
     fun providesPostRepository(
         postRepositoryImpl: PostRepositoryImpl
     ): PostRepository = postRepositoryImpl
+
+    @Provides
+    @ViewModelScoped
+    fun providesChatRepository(
+        chatRepositoryImpl: ChatRepositoryImpl
+    ): ChatRepository = chatRepositoryImpl
 }

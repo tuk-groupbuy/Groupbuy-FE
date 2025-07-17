@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    tools:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        style="@style/TextAppearance.TUgether.Body1"
+        android:textColor="@color/gray_600"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2011.11.11"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_senderer_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/shape_rect_8_blue_400_fill"
+        android:breakStrategy="simple"
+        android:clipToOutline="true"
+        android:maxWidth="280dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_date"
+        app:layout_wrapBehaviorInParent="vertical_only"
+        tools:text="이 물건 구매하고 싶어요" />
+
+    <TextView
+        android:id="@+id/tv_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="22:00"
+        style="@style/TextAppearance.TUgether.Body1"
+        android:textColor="@color/gray_600"
+        app:layout_constraintBottom_toBottomOf="@id/tv_senderer_chat"
+        app:layout_constraintEnd_toStartOf="@id/tv_senderer_chat"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
